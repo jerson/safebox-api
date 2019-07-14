@@ -1,0 +1,11 @@
+.idea
+api-server
+vendor/
+config.toml
+*.pprof
+*.memprof
+*.tmp
+*.bak
+*.tar.gz
+*.log
+*.pid

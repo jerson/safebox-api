@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+    api:
+        image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
+        ports:
+          - 8000:8000
+        depends_on:
+          - mysql
+        volumes:
+          - logs:/app/logs
+        configs:
+          - source: api
+            target: /app/config.toml
+        networks:
+          - public
+          - private
+
+    mysql:
+        image: mysql:5.7
+        command: --sql_mode=""
+        volumes:
+          - mysql:/var/lib/mysql
+        environment:
+          - MYSQL_USER=app
+          - MYSQL_PASSWORD=app
+          - MYSQL_DATABASE=app
+          - MYSQL_ALLOW_EMPTY_PASSWORD=false
+        networks:
+          - private
+
+networks:
+  public:
+  private:
+
+
+volumes:
+  logs:
+  mysql:
+
+configs:
+  api:
+    external:
+      name: app_api
