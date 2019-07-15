@@ -2,18 +2,11 @@ package context
 
 import (
 	"fmt"
-	"github.com/go-playground/form"
 	"github.com/juju/errors"
 	"github.com/sirupsen/logrus"
 	"safebox.jerson.dev/api/modules/cache"
 	"safebox.jerson.dev/api/modules/config"
 )
-
-var decoder *form.Decoder
-
-func init() {
-	decoder = form.NewDecoder()
-}
 
 // template ...
 type template struct {

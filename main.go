@@ -2,17 +2,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/facebookgo/grace/gracehttp"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/iris-contrib/middleware/cors"
-	"github.com/kataras/iris"
-	"github.com/kataras/iris/middleware/recover"
-	"net/http"
-	"safebox.jerson.dev/api/controllers"
 	"safebox.jerson.dev/api/models"
 	"safebox.jerson.dev/api/modules/config"
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/db"
+	"safebox.jerson.dev/api/modules/metrics"
+	"time"
+
+	_ "github.com/go-sql-driver/mysql"
+	"net/http"
+
+	"github.com/hprose/hprose-golang/rpc"
 )
 
 func init() {
@@ -21,12 +21,7 @@ func init() {
 		panic(err)
 	}
 }
-
-func main() {
-
-	ctx := context.NewSingle("api")
-	defer ctx.Close()
-
+func migrate(ctx context.Base) {
 	cn, err := db.Setup(ctx)
 	if err != nil {
 		panic(err)
@@ -38,29 +33,35 @@ func main() {
 		&models.Purchase{},
 		&models.User{},
 	)
+}
 
-	app := iris.New()
-	app.Use(recover.New())
-	app.Use(cors.Default())
+func main() {
 
-	controllers.MetricsController(app)
-	controllers.BaseController(app)
-	controllers.AccountController(app)
-	controllers.AuditLogController(app)
-	controllers.ProductController(app)
-	controllers.PurchaseController(app)
-	controllers.UserController(app)
+	ctx := context.NewSingle("main")
+	defer ctx.Close()
 
-	log := ctx.GetLogger("main")
-	port := fmt.Sprintf(":%d", config.Vars.Server.Port)
-	log.Infof("running %s", port)
+	migrate(ctx)
 
-	app.Build()
-	err = gracehttp.Serve(
-		&http.Server{Addr: port, Handler: app},
-	)
+	server := fmt.Sprintf(":%d", config.Vars.Server.Port)
+	fmt.Println("running: ", server)
+	service := rpc.NewHTTPService()
+	service.AddFunction("Ping", func() string {
+		return time.Now().String()
+	})
+
+	service.AddFunction("GetStatus", func() (string, error) {
+
+		ctx := context.NewSingle("command")
+		defer ctx.Close()
+
+		return "tes", nil
+	})
+
+	metrics.RPC(ctx, service)
+
+	http.Handle("/", service)
+	err := http.ListenAndServe(server, nil)
 	if err != nil {
 		panic(err)
 	}
-
 }

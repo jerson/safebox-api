@@ -11,7 +11,7 @@ services:
           - mysql
         volumes:
           - ./:/srv/go/src/safebox.jerson.dev/api
-        entrypoint: sh -c "./entrypoint-dev.sh"
+        entrypoint: sh
 
     mysql:
         image: mysql:5.7

@@ -25,6 +25,5 @@ COPY --from=builder ${BUILDER_PATH}/config.toml .
 COPY --from=builder ${BUILDER_PATH}/api-server .
 
 EXPOSE 8000
-VOLUME ["${WORKDIR}/logs"]
 
 ENTRYPOINT ["/app/api-server"]
