@@ -2,17 +2,14 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
+	"google.golang.org/grpc"
+	"net"
 	"safebox.jerson.dev/api/models"
 	"safebox.jerson.dev/api/modules/config"
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/db"
-	"safebox.jerson.dev/api/modules/metrics"
-	"time"
-
-	_ "github.com/go-sql-driver/mysql"
-	"net/http"
-
-	"github.com/hprose/hprose-golang/rpc"
+	pb "safebox.jerson.dev/api/services"
 )
 
 func init() {
@@ -42,26 +39,17 @@ func main() {
 
 	migrate(ctx)
 
-	server := fmt.Sprintf(":%d", config.Vars.Server.Port)
-	fmt.Println("running: ", server)
-	service := rpc.NewHTTPService()
-	service.AddFunction("Ping", func() string {
-		return time.Now().String()
-	})
+	port := fmt.Sprintf(":%d", config.Vars.Server.Port)
+	fmt.Println("running: ", port)
 
-	service.AddFunction("GetStatus", func() (string, error) {
-
-		ctx := context.NewSingle("command")
-		defer ctx.Close()
-
-		return "tes", nil
-	})
-
-	metrics.RPC(ctx, service)
-
-	http.Handle("/", service)
-	err := http.ListenAndServe(server, nil)
+	lis, err := net.Listen("tcp", port)
 	if err != nil {
+		panic(err)
+	}
+
+	server := grpc.NewServer()
+	pb.RegisterServicesServer(server, &pb.Server{})
+	if err := server.Serve(lis); err != nil {
 		panic(err)
 	}
 }

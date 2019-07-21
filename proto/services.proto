@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+service Services {
+  rpc Ping (PingRequest) returns (PingReply) {}
+  rpc Login (LoginRequest) returns (HelloReply) {}
+  rpc Register (RegisterRequest) returns (HelloReply) {}
+}
+
+message PingRequest {}
+
+message PingReply {
+    string  name = 1;
+}
+
+message LoginRequest {
+   string  name = 1;
+}
+
+message RegisterRequest {
+   string name = 1;
+}
+
+message HelloReply {
+   string message = 1;
+}

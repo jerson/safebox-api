@@ -2,10 +2,15 @@ REGISTRY?=registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
 APP_VERSION?=latest
 BUILD?=go build -ldflags="-w -s"
 
+.PHONY: proto
+
 default: build
 
 build: format lint
 	$(BUILD) -o api-server main.go
+
+proto:
+	protoc -I proto/ proto/services.proto --go_out=plugins=grpc:services
 
 deps:
 	dep ensure -vendor-only

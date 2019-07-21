@@ -45,9 +45,15 @@
   version = "v1.4.1"
 
 [[projects]]
-  digest = "1:573ca21d3669500ff845bdebee890eb7fc7f0f50c59f2132f2a0c6b03d85086a"
+  digest = "1:f5ce1529abc1204444ec73779f44f94e2fa8fcdb7aca3c355b0c95947e4005c6"
   name = "github.com/golang/protobuf"
-  packages = ["proto"]
+  packages = [
+    "proto",
+    "ptypes",
+    "ptypes/any",
+    "ptypes/duration",
+    "ptypes/timestamp",
+  ]
   pruneopts = "UT"
   revision = "6c65a5562fc06764971b7c5d05c76c75e84bdbf7"
   version = "v1.3.2"
@@ -73,12 +79,12 @@
   version = "v2.0.4"
 
 [[projects]]
-  digest = "1:0865912344ac2e3b7e5768da0a4305de8f8ea95efbd96f553e93f49a37857d58"
+  digest = "1:6badb17f9fa52d93054ab8b282a5f8776b17a2bc3b862f84444a57fceb23cc46"
   name = "github.com/jinzhu/configor"
   packages = ["."]
   pruneopts = "UT"
-  revision = "9064de4b2535f218bde55dc8de50a3904ef800d0"
-  version = "v1.1.0"
+  revision = "f52abb230c951b14a04e8515ca4e248be7690321"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:09424e4abeba1d2fc80c47c26347a3eed24f9cfd83173131dd048479ca6e041a"
@@ -189,6 +195,21 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:d31a812696686f0059241fa6c3b56d89ada56dddde4db1d5036de5c1084000c5"
+  name = "golang.org/x/net"
+  packages = [
+    "http/httpguts",
+    "http2",
+    "http2/hpack",
+    "idna",
+    "internal/timeseries",
+    "trace",
+  ]
+  pruneopts = "UT"
+  revision = "da137c7871d730100384dbcf36e6f8fa493aef5b"
+
+[[projects]]
+  branch = "master"
   digest = "1:31d44814b45607afa77c6e8ef20ea8bacc1d1053fe084440c874f311732e7ec3"
   name = "golang.org/x/sys"
   packages = [
@@ -199,12 +220,87 @@
   revision = "fae7ac547cb717d141c433a2a173315e216b64c4"
 
 [[projects]]
+  digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/language",
+    "internal/language/compact",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
+  version = "v0.3.2"
+
+[[projects]]
   digest = "1:c25289f43ac4a68d88b02245742347c94f1e108c534dda442188015ff80669b3"
   name = "google.golang.org/appengine"
   packages = ["cloudsql"]
   pruneopts = "UT"
   revision = "b2f4a3cf3c67576a2ee09e1fe62656a5086ce880"
   version = "v1.6.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:583a0c80f5e3a9343d33aea4aead1e1afcc0043db66fdf961ddd1fe8cd3a4faf"
+  name = "google.golang.org/genproto"
+  packages = ["googleapis/rpc/status"]
+  pruneopts = "UT"
+  revision = "c506a9f9061087022822e8da603a52fc387115a8"
+
+[[projects]]
+  digest = "1:cf01ae0753310464677058b125fa31e74fd943781782ada503180ad784fc83d3"
+  name = "google.golang.org/grpc"
+  packages = [
+    ".",
+    "balancer",
+    "balancer/base",
+    "balancer/roundrobin",
+    "binarylog/grpc_binarylog_v1",
+    "codes",
+    "connectivity",
+    "credentials",
+    "credentials/internal",
+    "encoding",
+    "encoding/proto",
+    "grpclog",
+    "internal",
+    "internal/backoff",
+    "internal/balancerload",
+    "internal/binarylog",
+    "internal/channelz",
+    "internal/envconfig",
+    "internal/grpcrand",
+    "internal/grpcsync",
+    "internal/syscall",
+    "internal/transport",
+    "keepalive",
+    "metadata",
+    "naming",
+    "peer",
+    "resolver",
+    "resolver/dns",
+    "resolver/passthrough",
+    "serviceconfig",
+    "stats",
+    "status",
+    "tap",
+  ]
+  pruneopts = "UT"
+  revision = "1d89a3c832915b2314551c1d2a506874d62e53f7"
+  version = "v1.22.0"
 
 [[projects]]
   digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
@@ -221,6 +317,7 @@
     "github.com/allegro/bigcache",
     "github.com/asaskevich/govalidator",
     "github.com/go-sql-driver/mysql",
+    "github.com/golang/protobuf/proto",
     "github.com/gosimple/slug",
     "github.com/hprose/hprose-golang/rpc",
     "github.com/jinzhu/configor",
@@ -230,6 +327,9 @@
     "github.com/prometheus/client_golang/prometheus/promhttp",
     "github.com/rs/xid",
     "github.com/sirupsen/logrus",
+    "google.golang.org/grpc",
+    "google.golang.org/grpc/codes",
+    "google.golang.org/grpc/status",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
