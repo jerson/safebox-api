@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"safebox.jerson.dev/api/models"
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/util"
@@ -14,6 +15,11 @@ func getUserByToken(ctx context.Context, token string) (*models.User, error) {
 	accessToken, err := repository.FindOneByToken(token)
 	if err != nil {
 		return nil, err
+	}
+
+	diff := accessToken.DateExpire.Sub(time.Now())
+	if diff < time.Second*0 {
+		return nil, errors.New("expired token")
 	}
 
 	userRepository := repositories.NewUserRepository(ctx)
