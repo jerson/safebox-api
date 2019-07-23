@@ -14,18 +14,6 @@ func (s *Server) Ping(ctx context.Context, in *PingRequest) (*PingResponse, erro
 	return &PingResponse{Name: "Hello "}, nil
 }
 
-// Login ...
-func (s *Server) Login(ctx context.Context, in *LoginRequest) (*LoginResponse, error) {
-	log.Printf("Received")
-	return &LoginResponse{AccessToken: "dd"}, nil
-}
-
-// Register ...
-func (s *Server) Register(ctx context.Context, in *RegisterRequest) (*RegisterResponse, error) {
-	log.Printf("Received")
-	return &RegisterResponse{AccessToken: "dd"}, nil
-}
-
 // AddAccount ...
 func (s *Server) AddAccount(ctx context.Context, in *AccountAddRequest) (*AccountAddResponse, error) {
 	log.Printf("Received")

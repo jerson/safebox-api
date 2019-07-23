@@ -2,9 +2,7 @@ package context
 
 import (
 	"fmt"
-	"github.com/juju/errors"
 	"github.com/sirupsen/logrus"
-	"safebox.jerson.dev/api/modules/cache"
 	"safebox.jerson.dev/api/modules/config"
 )
 
@@ -48,24 +46,4 @@ func (r *template) GetLogger(tag string) *logrus.Entry {
 	})
 
 	return r.Logger
-}
-
-// GetCacheResponse ...
-func (r template) GetCacheResponse(key string) ([]byte, error) {
-
-	if !config.Vars.Cache.Enable {
-		return nil, errors.New("cache disabled")
-	}
-
-	client, err := cache.Connect()
-	if err != nil {
-		return nil, err
-	}
-
-	data, err := client.Get(key)
-	if err != nil {
-		return nil, err
-	}
-
-	return data, nil
 }
