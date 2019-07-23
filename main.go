@@ -3,13 +3,15 @@ package main
 import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"google.golang.org/grpc"
-	"net"
+	"net/http"
 	"safebox.jerson.dev/api/models"
 	"safebox.jerson.dev/api/modules/config"
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/db"
 	pb "safebox.jerson.dev/api/services"
+	"time"
 )
 
 func init() {
@@ -42,14 +44,28 @@ func main() {
 	port := fmt.Sprintf(":%d", config.Vars.Server.Port)
 	fmt.Println("running: ", port)
 
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
-		panic(err)
-	}
-
 	server := grpc.NewServer()
 	pb.RegisterServicesServer(server, &pb.Server{})
-	if err := server.Serve(lis); err != nil {
+
+	wrappedGRPC := grpcweb.WrapServer(server)
+	handler := http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
+		if wrappedGRPC.IsGrpcWebRequest(req) {
+			wrappedGRPC.ServeHTTP(resp, req)
+			return
+		}
+		http.DefaultServeMux.ServeHTTP(resp, req)
+	})
+
+	s := &http.Server{
+		Addr:           port,
+		Handler:        handler,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	err := s.ListenAndServe()
+	if err != nil {
 		panic(err)
 	}
 }

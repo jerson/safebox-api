@@ -59,6 +59,14 @@
   version = "v1.3.2"
 
 [[projects]]
+  digest = "1:7b5c6e2eeaa9ae5907c391a91c132abfd5c9e8a784a341b5625e750c67e6825d"
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "66b9c49e59c6c48f0ffce28c2d8b8a5678502c6d"
+  version = "v1.4.0"
+
+[[projects]]
   digest = "1:e46ef3b65e25f610b7151015e2b782af1aad6f8bb8ac2edb5bb90c1b94e92524"
   name = "github.com/gosimple/slug"
   packages = ["."]
@@ -77,6 +85,14 @@
   pruneopts = "UT"
   revision = "b2b25423cffe1829254b1e4fbc6f0a7360dd626b"
   version = "v2.0.4"
+
+[[projects]]
+  digest = "1:673c9045193577a2b500324a298ac1cb134ce55de36ab9b62c4aad23f1a8e207"
+  name = "github.com/improbable-eng/grpc-web"
+  packages = ["go/grpcweb"]
+  pruneopts = "UT"
+  revision = "27df3513f5f1e831fb9e858a0cf1aaa08631915e"
+  version = "v0.9.6"
 
 [[projects]]
   digest = "1:6badb17f9fa52d93054ab8b282a5f8776b17a2bc3b862f84444a57fceb23cc46"
@@ -176,6 +192,14 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "cb7f23ec59bec0d61b19c56cd88cee3d0cc1870c"
+
+[[projects]]
+  digest = "1:b0c25f00bad20d783d259af2af8666969e2fc343fa0dc9efe52936bbd67fb758"
+  name = "github.com/rs/cors"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "9a47f48565a795472d43519dd49aac781f3034fb"
+  version = "v1.6.0"
 
 [[projects]]
   digest = "1:2e76a73cb51f42d63a2a1a85b3dc5731fd4faf6821b434bd0ef2c099186031d6"
@@ -320,6 +344,7 @@
     "github.com/golang/protobuf/proto",
     "github.com/gosimple/slug",
     "github.com/hprose/hprose-golang/rpc",
+    "github.com/improbable-eng/grpc-web/go/grpcweb",
     "github.com/jinzhu/configor",
     "github.com/jinzhu/gorm",
     "github.com/juju/errors",

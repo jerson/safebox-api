@@ -10,7 +10,7 @@ build: format lint
 	$(BUILD) -o api-server main.go
 
 proto:
-	protoc -I proto/ proto/services.proto --go_out=plugins=grpc:services
+	protoc -I proto services.proto --go_out=plugins=grpc:services
 
 deps:
 	dep ensure -vendor-only
