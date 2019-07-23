@@ -2,38 +2,20 @@ package services
 
 import (
 	"context"
-	"log"
+	appContext "safebox.jerson.dev/api/modules/context"
 )
 
 // Server ...
 type Server struct{}
 
 // Ping ...
-func (s *Server) Ping(ctx context.Context, in *PingRequest) (*PingResponse, error) {
-	log.Printf("Received")
-	return &PingResponse{Name: "Hello "}, nil
-}
+func (s *Server) Ping(context context.Context, in *PingRequest) (*PingResponse, error) {
 
-// AddAccount ...
-func (s *Server) AddAccount(ctx context.Context, in *AccountAddRequest) (*AccountAddResponse, error) {
-	log.Printf("Received")
-	return &AccountAddResponse{}, nil
-}
+	ctx := appContext.NewContext(context, "Ping")
+	defer ctx.Close()
 
-// GetAccounts ...
-func (s *Server) GetAccounts(ctx context.Context, in *AccountsRequest) (*AccountsResponse, error) {
-	log.Printf("Received")
-	return &AccountsResponse{Accounts: []*AccountSingle{}}, nil
-}
+	log := ctx.GetLogger("main")
+	log.Info("Ping")
 
-// GetAccount ...
-func (s *Server) GetAccount(ctx context.Context, in *AccountRequest) (*AccountResponse, error) {
-	log.Printf("Received")
-	return &AccountResponse{Account: &Account{}}, nil
-}
-
-// BuyProduct ...
-func (s *Server) BuyProduct(ctx context.Context, in *BuyProductRequest) (*BuyProductResponse, error) {
-	log.Printf("Received")
-	return &BuyProductResponse{Success: true}, nil
+	return &PingResponse{Name: "Hello Ping"}, nil
 }

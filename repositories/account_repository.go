@@ -18,6 +18,42 @@ func NewAccountRepository(ctx context.Context) AccountRepository {
 	return AccountRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
+//ListByUserID ...
+func (a AccountRepository) ListByUserID(userID int64, offset, limit int, sort, sortType string) (list models.AccountList, err error) {
+
+	cn, err := a.DB()
+	if err != nil {
+		return
+	}
+	defer a.Close()
+	sortAllows := map[string]string{
+		"id": "id",
+	}
+
+	list = models.AccountList{Limit: limit, Offset: offset}
+	qb := a.preload(cn.Model(models.Account{})).
+		Offset(offset).
+		Limit(limit).
+		Where("user_id = ?", userID)
+
+	err = qb.
+		Order(util.SortValues(sort, sortType, sortAllows)).
+		Offset(offset).
+		Limit(limit).
+		Find(&list.Items).
+		Error
+
+	if err != nil {
+		return
+	}
+	err = qb.Count(&list.Total).Error
+	if err != nil {
+		list.Total = len(list.Items)
+	}
+
+	return
+}
+
 //List ...
 func (a AccountRepository) List(offset, limit int, sort, sortType string) (list models.AccountList, err error) {
 

@@ -9,7 +9,7 @@ service Services {
     }
     rpc Register (RegisterRequest) returns (RegisterResponse) {
     }
-    rpc AddAccount (AccountAddRequest) returns (AccountAddResponse) {
+    rpc AddAccount (AddAccountRequest) returns (AddAccountResponse) {
     }
     rpc GetAccounts (AccountsRequest) returns (AccountsResponse) {
     }
@@ -61,11 +61,11 @@ message AccountSingle {
 }
 
 
-message AccountAddRequest {
+message AddAccountRequest {
     string accessToken = 1;
     Account account = 2;
 }
-message AccountAddResponse {
+message AddAccountResponse {
     int64 id = 1;
 }
 
