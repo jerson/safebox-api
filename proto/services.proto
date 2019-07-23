@@ -1,25 +1,93 @@
 syntax = "proto3";
 
+
 service Services {
-  rpc Ping (PingRequest) returns (PingReply) {}
-  rpc Login (LoginRequest) returns (HelloReply) {}
-  rpc Register (RegisterRequest) returns (HelloReply) {}
+    rpc Ping (PingRequest) returns (PingResponse) {
+    }
+
+    rpc Login (LoginRequest) returns (LoginResponse) {
+    }
+    rpc Register (RegisterRequest) returns (RegisterResponse) {
+    }
+    rpc AddAccount (AccountAddRequest) returns (AccountAddResponse) {
+    }
+    rpc GetAccounts (AccountsRequest) returns (AccountsResponse) {
+    }
+    rpc GetAccount (AccountRequest) returns (AccountResponse) {
+    }
+    rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
+    }
+
 }
 
-message PingRequest {}
+message PingRequest {
+}
 
-message PingReply {
-    string  name = 1;
+message PingResponse {
+    string name = 1;
 }
 
 message LoginRequest {
-   string  name = 1;
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string accessToken = 2;
 }
 
 message RegisterRequest {
-   string name = 1;
+    string username = 1;
+    string privateKey = 2;
+    string publicKey = 3;
+}
+message RegisterResponse {
+    bool success = 1;
+    string accessToken = 2;
 }
 
-message HelloReply {
-   string message = 1;
+message Account {
+    string label = 1;
+    string username = 2;
+    string password = 3;
+    string hint = 4;
+}
+
+message AccountSingle {
+    int64 id = 1;
+    string label = 2;
+    string username = 3;
+    string hint = 4;
+}
+
+
+message AccountAddRequest {
+    string accessToken = 1;
+    Account account = 2;
+}
+message AccountAddResponse {
+    int64 id = 1;
+}
+
+message AccountsRequest {
+    string accessToken = 1;
+}
+message AccountsResponse {
+    repeated AccountSingle accounts = 1;
+}
+
+message AccountRequest {
+    string accessToken = 1;
+    int64 id = 2;
+}
+message AccountResponse {
+    Account account = 1;
+}
+
+message BuyProductRequest {
+    string accessToken = 1;
+    string slug = 2;
+}
+message BuyProductResponse {
+    bool success = 1;
 }
