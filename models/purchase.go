@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"safebox.jerson.dev/api/modules/validator"
 	"time"
 )
 
@@ -33,7 +32,7 @@ func (Purchase) TableName() string {
 
 //IsValid ...
 func (p *Purchase) IsValid() error {
-	return validator.Validate(p)
+	return nil
 }
 
 //BeforeCreate ...

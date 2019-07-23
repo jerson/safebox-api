@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"safebox.jerson.dev/api/modules/validator"
 )
 
 //AuditLog ...
@@ -31,7 +30,7 @@ func (AuditLog) TableName() string {
 
 //IsValid ...
 func (a *AuditLog) IsValid() error {
-	return validator.Validate(a)
+	return nil
 }
 
 //BeforeCreate ...

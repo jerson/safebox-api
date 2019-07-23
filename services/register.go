@@ -2,11 +2,40 @@ package services
 
 import (
 	"context"
-	"log"
+	"errors"
+	"safebox.jerson.dev/api/models"
+	appContext "safebox.jerson.dev/api/modules/context"
+	"safebox.jerson.dev/api/repositories"
 )
 
 // Register ...
-func (s *Server) Register(ctx context.Context, in *RegisterRequest) (*RegisterResponse, error) {
-	log.Printf("Received")
-	return &RegisterResponse{AccessToken: "dd"}, nil
+func (s *Server) Register(context context.Context, in *RegisterRequest) (*RegisterResponse, error) {
+
+	ctx := appContext.NewContext(context, "Register")
+	defer ctx.Close()
+
+	repository := repositories.NewUserRepository(ctx)
+
+	user, _ := repository.FindOneByUsername(in.Username)
+	if user != nil {
+		return nil, errors.New("already registered")
+	}
+
+	userInput := models.User{
+		PrivateKey: in.PrivateKey,
+		PublicKey:  in.PublicKey,
+		Username:   in.Username,
+	}
+
+	user, err := repository.Create(userInput)
+	if err != nil {
+		return nil, err
+	}
+
+	accessToken, err := getAccessToken(ctx, *user)
+	if err != nil {
+		return nil, err
+	}
+
+	return &RegisterResponse{AccessToken: accessToken}, nil
 }

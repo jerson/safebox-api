@@ -11,7 +11,7 @@ import (
 )
 
 // Setup ...
-func Setup(ctx context.Base) (*gorm.DB, error) {
+func Setup(ctx context.Context) (*gorm.DB, error) {
 	log := ctx.GetLogger("DB.gorm.Setup")
 	i := 0
 	limit := 20
@@ -30,7 +30,7 @@ func Setup(ctx context.Base) (*gorm.DB, error) {
 	}
 }
 
-func singleSetup(ctx context.Base) (*gorm.DB, error) {
+func singleSetup(ctx context.Context) (*gorm.DB, error) {
 
 	name := config.Vars.Database.Name
 	user := config.Vars.Database.User

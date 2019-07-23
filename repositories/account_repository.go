@@ -14,7 +14,7 @@ type AccountRepository struct {
 }
 
 //NewAccountRepository ...
-func NewAccountRepository(ctx context.Base) AccountRepository {
+func NewAccountRepository(ctx context.Context) AccountRepository {
 	return AccountRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
@@ -105,12 +105,6 @@ func (a AccountRepository) Create(object models.Account) (*models.Account, error
 
 	return &object, nil
 
-}
-
-//Update ...
-func (a AccountRepository) Update(object models.Account, data interface{}) (err error) {
-	values := a.DiffStruct(&object, data)
-	return a.UpdateColumns(object, values)
 }
 
 //UpdateColumns ...

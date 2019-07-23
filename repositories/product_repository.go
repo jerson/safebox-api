@@ -14,7 +14,7 @@ type ProductRepository struct {
 }
 
 //NewProductRepository ...
-func NewProductRepository(ctx context.Base) ProductRepository {
+func NewProductRepository(ctx context.Context) ProductRepository {
 	return ProductRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
@@ -105,12 +105,6 @@ func (p ProductRepository) Create(object models.Product) (*models.Product, error
 
 	return &object, nil
 
-}
-
-//Update ...
-func (p ProductRepository) Update(object models.Product, data interface{}) (err error) {
-	values := p.DiffStruct(&object, data)
-	return p.UpdateColumns(object, values)
 }
 
 //UpdateColumns ...

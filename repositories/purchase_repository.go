@@ -14,7 +14,7 @@ type PurchaseRepository struct {
 }
 
 //NewPurchaseRepository ...
-func NewPurchaseRepository(ctx context.Base) PurchaseRepository {
+func NewPurchaseRepository(ctx context.Context) PurchaseRepository {
 	return PurchaseRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
@@ -71,12 +71,6 @@ func (p PurchaseRepository) Create(object models.Purchase) (*models.Purchase, er
 
 	return &object, nil
 
-}
-
-//Update ...
-func (p PurchaseRepository) Update(object models.Purchase, data interface{}) (err error) {
-	values := p.DiffStruct(&object, data)
-	return p.UpdateColumns(object, values)
 }
 
 //UpdateColumns ...

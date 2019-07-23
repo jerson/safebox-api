@@ -3,7 +3,6 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"safebox.jerson.dev/api/modules/util"
-	"safebox.jerson.dev/api/modules/validator"
 )
 
 //Product ...
@@ -29,7 +28,7 @@ func (Product) TableName() string {
 
 //IsValid ...
 func (p *Product) IsValid() error {
-	return validator.Validate(p)
+	return nil
 }
 
 //BeforeCreate ...

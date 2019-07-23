@@ -14,7 +14,7 @@ type UserRepository struct {
 }
 
 //NewUserRepository ...
-func NewUserRepository(ctx context.Base) UserRepository {
+func NewUserRepository(ctx context.Context) UserRepository {
 	return UserRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
@@ -105,12 +105,6 @@ func (u UserRepository) Create(object models.User) (*models.User, error) {
 
 	return &object, nil
 
-}
-
-//Update ...
-func (u UserRepository) Update(object models.User, data interface{}) (err error) {
-	values := u.DiffStruct(&object, data)
-	return u.UpdateColumns(object, values)
 }
 
 //UpdateColumns ...

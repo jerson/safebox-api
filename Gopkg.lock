@@ -10,14 +10,6 @@
   version = "v0.3.1"
 
 [[projects]]
-  digest = "1:320e7ead93de9fd2b0e59b50fd92a4d50c1f8ab455d96bc2eb083267453a9709"
-  name = "github.com/asaskevich/govalidator"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "ccb8e960c48f04d6935e72476ae4a51028f9e22f"
-  version = "v9"
-
-[[projects]]
   digest = "1:ec6f9bf5e274c833c911923c9193867f3f18788c461f76f05f62bb1510e0ae65"
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
@@ -86,6 +78,28 @@
   pruneopts = "UT"
   revision = "f5c5f50e6090ae76a29240b61ae2a90dd810112e"
   version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:7b1d8f83ad794f2967dfb98015f8327f2a099654b778fb1c09669d9a083293c0"
+  name = "github.com/keybase/go-crypto"
+  packages = [
+    "brainpool",
+    "cast5",
+    "curve25519",
+    "ed25519",
+    "ed25519/internal/edwards25519",
+    "openpgp",
+    "openpgp/armor",
+    "openpgp/ecdh",
+    "openpgp/elgamal",
+    "openpgp/errors",
+    "openpgp/packet",
+    "openpgp/s2k",
+    "rsa",
+  ]
+  pruneopts = "UT"
+  revision = "b785b22cc75714432d7ebf0b554dfafaff608671"
 
 [[projects]]
   digest = "1:31e761d97c76151dde79e9d28964a812c46efc5baee4085b86f68f0c654450de"
@@ -245,13 +259,15 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/asaskevich/govalidator",
     "github.com/go-sql-driver/mysql",
     "github.com/golang/protobuf/proto",
     "github.com/gosimple/slug",
     "github.com/improbable-eng/grpc-web/go/grpcweb",
     "github.com/jinzhu/configor",
     "github.com/jinzhu/gorm",
+    "github.com/keybase/go-crypto/openpgp",
+    "github.com/keybase/go-crypto/openpgp/armor",
+    "github.com/keybase/go-crypto/openpgp/packet",
     "github.com/rs/xid",
     "github.com/sirupsen/logrus",
     "google.golang.org/grpc",

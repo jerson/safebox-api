@@ -14,7 +14,7 @@ type AccessTokenRepository struct {
 }
 
 //NewAccessTokenRepository ...
-func NewAccessTokenRepository(ctx context.Base) AccessTokenRepository {
+func NewAccessTokenRepository(ctx context.Context) AccessTokenRepository {
 	return AccessTokenRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
@@ -55,6 +55,16 @@ func (a AccessTokenRepository) FindOneByID(ID int64) (*models.AccessToken, error
 	return a.FindOne("id = ?", ID)
 }
 
+//FindOneByToken ...
+func (a AccessTokenRepository) FindOneByToken(token string) (*models.AccessToken, error) {
+	return a.FindOne("token = ?", token)
+}
+
+//FindOnyByUserID ...
+func (a AccessTokenRepository) FindOnyByUserID(userID int64) (*models.AccessToken, error) {
+	return a.FindOne("user_id = ?", userID)
+}
+
 //Create ...
 func (a AccessTokenRepository) Create(object models.AccessToken) (*models.AccessToken, error) {
 
@@ -71,12 +81,6 @@ func (a AccessTokenRepository) Create(object models.AccessToken) (*models.Access
 
 	return &object, nil
 
-}
-
-//Update ...
-func (a AccessTokenRepository) Update(object models.AccessToken, data interface{}) (err error) {
-	values := a.DiffStruct(&object, data)
-	return a.UpdateColumns(object, values)
 }
 
 //UpdateColumns ...

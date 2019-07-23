@@ -14,7 +14,7 @@ type AuditLogRepository struct {
 }
 
 //NewAuditLogRepository ...
-func NewAuditLogRepository(ctx context.Base) AuditLogRepository {
+func NewAuditLogRepository(ctx context.Context) AuditLogRepository {
 	return AuditLogRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
@@ -71,12 +71,6 @@ func (a AuditLogRepository) Create(object models.AuditLog) (*models.AuditLog, er
 
 	return &object, nil
 
-}
-
-//Update ...
-func (a AuditLogRepository) Update(object models.AuditLog, data interface{}) (err error) {
-	values := a.DiffStruct(&object, data)
-	return a.UpdateColumns(object, values)
 }
 
 //UpdateColumns ...

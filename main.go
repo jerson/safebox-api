@@ -10,7 +10,7 @@ import (
 	"safebox.jerson.dev/api/modules/config"
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/db"
-	pb "safebox.jerson.dev/api/services"
+	"safebox.jerson.dev/api/services"
 	"time"
 )
 
@@ -20,12 +20,13 @@ func init() {
 		panic(err)
 	}
 }
-func migrate(ctx context.Base) {
+func migrate(ctx context.Context) {
 	cn, err := db.Setup(ctx)
 	if err != nil {
 		panic(err)
 	}
 	cn.AutoMigrate(
+		&models.AccessToken{},
 		&models.Account{},
 		&models.AuditLog{},
 		&models.Product{},
@@ -36,7 +37,7 @@ func migrate(ctx context.Base) {
 
 func main() {
 
-	ctx := context.NewSingle("main")
+	ctx := context.NewContextSingle("main")
 	defer ctx.Close()
 
 	migrate(ctx)
@@ -45,7 +46,7 @@ func main() {
 	fmt.Println("running: ", port)
 
 	server := grpc.NewServer()
-	pb.RegisterServicesServer(server, &pb.Server{})
+	services.RegisterServicesServer(server, &services.Server{})
 
 	wrappedGRPC := grpcweb.WrapServer(server)
 	handler := http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
@@ -59,8 +60,8 @@ func main() {
 	s := &http.Server{
 		Addr:           port,
 		Handler:        handler,
-		ReadTimeout:    10 * time.Second,
-		WriteTimeout:   10 * time.Second,
+		ReadTimeout:    30 * time.Second,
+		WriteTimeout:   30 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
 

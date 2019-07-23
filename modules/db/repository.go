@@ -4,17 +4,16 @@ package db
 import (
 	"github.com/jinzhu/gorm"
 	"safebox.jerson.dev/api/modules/context"
-	"safebox.jerson.dev/api/modules/util"
 )
 
 // BaseRepository ...
 type BaseRepository struct {
-	ctx context.Base
+	ctx context.Context
 	cn  *gorm.DB
 }
 
 // NewBaseRepository ...
-func NewBaseRepository(ctx context.Base) BaseRepository {
+func NewBaseRepository(ctx context.Context) BaseRepository {
 	return BaseRepository{ctx: ctx}
 }
 
@@ -48,9 +47,4 @@ func (b *BaseRepository) SetDB(cn *gorm.DB) {
 // Close ...
 func (b *BaseRepository) Close() {
 	//TODO do something need to close here please
-}
-
-// DiffStruct ...
-func (b BaseRepository) DiffStruct(from, to interface{}) map[string]interface{} {
-	return util.DiffStruct(from, to)
 }

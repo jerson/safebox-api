@@ -20,7 +20,7 @@ func (r *template) GetToken() string {
 }
 
 // SetSession ...
-func (r *template) SetUser(id int) {
+func (r *template) SetUser(id int64) {
 	r.Session = fmt.Sprint(id)
 }
 
