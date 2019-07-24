@@ -1,43 +1,56 @@
 version: '3.3'
 services:
-    api:
-        image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
-        ports:
-          - 8000:8000
-        depends_on:
-          - mysql
-        volumes:
-          - logs:/app/logs
-        configs:
-          - source: api
-            target: /app/config.toml
-        networks:
-          - public
-          - private
+  api:
+    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
+    configs:
+      - source: api
+        target: /app/config.toml
+    networks:
+      - public
+      - private
+    deploy:
+      labels:
+        - "traefik.frontend.rule=Host:safebox.jerson.dev"
+        - "traefik.port=8000"
+        - "traefik.docker.network=public"
 
-    mysql:
-        image: mysql:5.7
-        command: --sql_mode=""
-        volumes:
-          - mysql:/var/lib/mysql
-        environment:
-          - MYSQL_USER=app
-          - MYSQL_PASSWORD=app
-          - MYSQL_DATABASE=app
-          - MYSQL_ALLOW_EMPTY_PASSWORD=false
-        networks:
-          - private
+  mysql:
+    image: mysql:5.7
+    command: --sql_mode=""
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - MYSQL_USER=safebox
+      - MYSQL_PASSWORD=safebox
+      - MYSQL_DATABASE=safebox
+      - MYSQL_ALLOW_EMPTY_PASSWORD=false
+    networks:
+      - private
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    networks:
+      - public
+      - private
+    deploy:
+      labels:
+        - "traefik.frontend.rule=Host:mysql-safebox.jerson.dev"
+        - "traefik.port=80"
+        - "traefik.docker.network=public"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
 
 networks:
   public:
+    external: true
   private:
 
 
 volumes:
-  logs:
   mysql:
 
 configs:
   api:
     external:
-      name: app_api
+      name: safebox_api_prod
