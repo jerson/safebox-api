@@ -3,14 +3,15 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"safebox.jerson.dev/api/modules/util"
+	"safebox.jerson.dev/api/modules/validator"
 )
 
 //Product ...
 type Product struct {
-	ID          int64  `gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" json:"id"`
-	Slug        string `gorm:"type:varchar(250);unique;not null;unique_index:slug_UNIQUE;column:slug" json:"slug"`
-	Name        string `gorm:"type:varchar(45);not null;column:name" json:"name"`
-	Description string `gorm:"type:text;column:description" json:"description,omitempty"`
+	ID          int64  `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" json:"id"`
+	Slug        string `valid:"-" gorm:"type:varchar(250);unique;not null;unique_index:slug_UNIQUE;column:slug" json:"slug"`
+	Name        string `valid:"required" gorm:"type:varchar(45);not null;column:name" json:"name"`
+	Description string `valid:"-" gorm:"type:text;column:description" json:"description,omitempty"`
 }
 
 //ProductList ...
@@ -28,7 +29,7 @@ func (Product) TableName() string {
 
 //IsValid ...
 func (p *Product) IsValid() error {
-	return nil
+	return validator.Validate(p)
 }
 
 //BeforeCreate ...

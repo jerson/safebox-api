@@ -40,12 +40,22 @@ func getAccessToken(ctx context.Context, user models.User) (string, error) {
 	repository := repositories.NewAccessTokenRepository(ctx)
 	dateExpire := time.Now().Add(time.Minute * 5)
 
+	randomToken, err := util.GenerateRandomASCIIString(30)
+	if err != nil {
+		return token, err
+	}
 	accessTokenInput := models.AccessToken{
 		UserID:     user.ID,
 		DateExpire: &dateExpire,
-		Token:      util.UniqueID(),
+		Token:      randomToken,
 	}
 	accessToken, err := repository.Create(accessTokenInput)
+	if err != nil {
+		return token, err
+	}
+
+	userRepo:= repositories.NewUserRepository(ctx)
+	err = userRepo.UpdateSingle(user,"date_connected",time.Now())
 	if err != nil {
 		return token, err
 	}

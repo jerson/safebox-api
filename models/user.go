@@ -2,17 +2,18 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+	"safebox.jerson.dev/api/modules/validator"
 	"time"
 )
 
 //User ...
 type User struct {
-	ID            int64      `gorm:"primary_key;auto_increment;type:bigint(20);not null;column:id" json:"id"`
-	Username      string     `gorm:"type:varchar(45);unique;not null;unique_index:username_UNIQUE;column:username" json:"username"`
-	PrivateKey    string     `gorm:"type:text;not null;column:private_key" json:"private_key"`
-	DateCreated   time.Time  `gorm:"type:datetime;not null;column:date_created" json:"date_created"`
-	DateConnected *time.Time `gorm:"type:datetime;column:date_connected" json:"date_connected,omitempty"`
-	PublicKey     string     `gorm:"type:text;not null;column:public_key" json:"public_key"`
+	ID            int64      `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;column:id" json:"id"`
+	Username      string     `valid:"required" gorm:"type:varchar(45);unique;not null;unique_index:username_UNIQUE;column:username" json:"username"`
+	PrivateKey    string     `valid:"required" gorm:"type:text;not null;column:private_key" json:"private_key"`
+	DateCreated   time.Time  `valid:"-" gorm:"type:datetime;not null;column:date_created" json:"date_created"`
+	DateConnected *time.Time `valid:"-" gorm:"type:datetime;column:date_connected" json:"date_connected,omitempty"`
+	PublicKey     string     `valid:"required" gorm:"type:text;not null;column:public_key" json:"public_key"`
 }
 
 //UserList ...
@@ -30,7 +31,7 @@ func (User) TableName() string {
 
 //IsValid ...
 func (u *User) IsValid() error {
-	return nil
+	return validator.Validate(u)
 }
 
 //BeforeCreate ...
