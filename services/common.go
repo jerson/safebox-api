@@ -40,7 +40,7 @@ func getAccessToken(ctx context.Context, user models.User) (string, error) {
 	repository := repositories.NewAccessTokenRepository(ctx)
 	dateExpire := time.Now().Add(time.Minute * 5)
 
-	randomToken, err := util.GenerateRandomASCIIString(30)
+	randomToken, err := util.GenerateRandomASCIIString(128)
 	if err != nil {
 		return token, err
 	}
