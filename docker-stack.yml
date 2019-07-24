@@ -27,7 +27,7 @@ services:
       - private
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:4.7
+    image: phpmyadmin/phpmyadmin:4.9
     networks:
       - public
       - private

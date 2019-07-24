@@ -24,7 +24,7 @@ services:
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
 
     phpmyadmin:
-        image: phpmyadmin/phpmyadmin:4.7
+        image: phpmyadmin/phpmyadmin:4.9
         ports:
           - 8090:80
         depends_on:
