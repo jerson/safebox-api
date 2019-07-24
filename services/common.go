@@ -54,8 +54,8 @@ func getAccessToken(ctx context.Context, user models.User) (string, error) {
 		return token, err
 	}
 
-	userRepo:= repositories.NewUserRepository(ctx)
-	err = userRepo.UpdateSingle(user,"date_connected",time.Now())
+	userRepo := repositories.NewUserRepository(ctx)
+	err = userRepo.UpdateSingle(user, "date_connected", time.Now())
 	if err != nil {
 		return token, err
 	}

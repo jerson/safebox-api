@@ -9,11 +9,11 @@ import (
 //User ...
 type User struct {
 	ID            int64      `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;column:id" json:"id"`
-	Username      string     `valid:"required" gorm:"type:varchar(45);unique;not null;unique_index:username_UNIQUE;column:username" json:"username"`
+	Username      string     `valid:"runelength(4|30),required" gorm:"type:varchar(45);unique;not null;unique_index:username_UNIQUE;column:username" json:"username"`
 	PrivateKey    string     `valid:"required" gorm:"type:text;not null;column:private_key" json:"private_key"`
+	PublicKey     string     `valid:"required" gorm:"type:text;not null;column:public_key" json:"public_key"`
 	DateCreated   time.Time  `valid:"-" gorm:"type:datetime;not null;column:date_created" json:"date_created"`
 	DateConnected *time.Time `valid:"-" gorm:"type:datetime;column:date_connected" json:"date_connected,omitempty"`
-	PublicKey     string     `valid:"required" gorm:"type:text;not null;column:public_key" json:"public_key"`
 }
 
 //UserList ...
