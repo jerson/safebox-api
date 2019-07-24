@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 	"errors"
-	"fmt"
 	"safebox.jerson.dev/api/models"
 	appContext "safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/repositories"
@@ -28,19 +27,16 @@ func (s *Server) Register(context context.Context, in *RegisterRequest) (*Regist
 		Username:   in.Username,
 	}
 
-	fmt.Println("register1")
 
 	user, err := repository.Create(userInput)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("register2")
 
 	accessToken, err := getAccessToken(ctx, *user)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("register3")
 
 	return &RegisterResponse{AccessToken: accessToken}, nil
 }
