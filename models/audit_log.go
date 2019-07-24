@@ -13,7 +13,7 @@ type AuditLog struct {
 	Action  string `valid:"required" gorm:"type:varchar(45);not null;index:idx_action;column:action" json:"action"`
 	Payload string `valid:"required" gorm:"type:text;column:payload" json:"payload,omitempty"`
 
-	User *User `gorm:"foreignkey:UserID" json:"user,omitempty"`
+	User *User `valid:"-" gorm:"foreignkey:UserID" json:"user,omitempty"`
 }
 
 //AuditLogList ...
@@ -42,5 +42,5 @@ func (a *AuditLog) BeforeCreate(scope *gorm.Scope) error {
 
 //BeforeUpdate ...
 func (a *AuditLog) BeforeUpdate(scope *gorm.Scope) error {
-	return a.IsValid()
+	return nil
 }

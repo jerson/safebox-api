@@ -12,6 +12,9 @@ build: format lint
 proto:
 	protoc -I proto services.proto --go_out=plugins=grpc:services
 
+dump:
+	./scripts/dump_db.sh
+
 deps:
 	dep ensure -vendor-only
 

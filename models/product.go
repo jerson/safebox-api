@@ -46,5 +46,5 @@ func (p *Product) BeforeUpdate(scope *gorm.Scope) error {
 	if p.Slug == "" {
 		scope.SetColumn("slug", util.Slug(p.Name))
 	}
-	return p.IsValid()
+	return nil
 }

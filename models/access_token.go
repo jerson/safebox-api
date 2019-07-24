@@ -14,7 +14,7 @@ type AccessToken struct {
 	Token       string     `valid:"required" gorm:"type:varchar(500);unique;unique_index:token_UNIQUE;index:token_IDX;column:token" json:"token,omitempty"`
 	UserID      int64      `valid:"required" gorm:"type:bigint(20);not null;index:fk_access_token_1_idx;column:user_id" json:"user_id"`
 
-	User User `gorm:"foreignkey:UserID" json:"user"`
+	User User `valid:"-" gorm:"foreignkey:UserID" json:"user"`
 }
 
 //AccessTokenList ...
@@ -45,5 +45,5 @@ func (a *AccessToken) BeforeCreate(scope *gorm.Scope) error {
 
 //BeforeUpdate ...
 func (a *AccessToken) BeforeUpdate(scope *gorm.Scope) error {
-	return a.IsValid()
+	return nil
 }

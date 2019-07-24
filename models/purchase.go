@@ -14,8 +14,8 @@ type Purchase struct {
 	Payload   string    `valid:"required" gorm:"type:text;column:payload" json:"payload,omitempty"`
 	Date      time.Time `valid:"-" gorm:"type:datetime;not null;column:date" json:"date"`
 
-	User    User    `gorm:"foreignkey:UserID" json:"user"`
-	Product Product `gorm:"foreignkey:ProductID" json:"product"`
+	User    User    `valid:"-" gorm:"foreignkey:UserID" json:"user"`
+	Product Product `valid:"-" gorm:"foreignkey:ProductID" json:"product"`
 }
 
 //PurchaseList ...
@@ -44,5 +44,5 @@ func (p *Purchase) BeforeCreate(scope *gorm.Scope) error {
 
 //BeforeUpdate ...
 func (p *Purchase) BeforeUpdate(scope *gorm.Scope) error {
-	return p.IsValid()
+	return nil
 }

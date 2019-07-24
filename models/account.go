@@ -10,14 +10,14 @@ import (
 type Account struct {
 	ID          int64      `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" json:"id"`
 	UserID      int64      `valid:"required" gorm:"type:bigint(20);not null;index:fk_account_1_idx;column:user_id" json:"user_id"`
-	Label       string     `valid:"runelength(1|50),required" gorm:"type:varchar(250);not null;column:label" json:"label"`
-	Username    string     `valid:"runelength(1|100),required" gorm:"type:varchar(250);not null;column:username" json:"username"`
-	Hint        string     `valid:"runelength(1|150),optional" gorm:"type:varchar(250);column:hint" json:"hint,omitempty"`
-	Password    string     `valid:"required" gorm:"type:text;not null;column:password" json:"password"`
+	Label       string     `valid:"runelength(1|50)~Label must have at least 1 character,required~Label is required" gorm:"type:varchar(250);not null;column:label" json:"label"`
+	Username    string     `valid:"runelength(1|100)~Username must have at least 1 character,required~Username is required" gorm:"type:varchar(250);not null;column:username" json:"username"`
+	Hint        string     `valid:"runelength(1|150)~Hint must have at least 1 character,optional" gorm:"type:varchar(250);column:hint" json:"hint,omitempty"`
+	Password    string     `valid:"required~Password is required" gorm:"type:text;not null;column:password" json:"password"`
 	DateCreated time.Time  `valid:"-" gorm:"type:datetime;not null;column:date_created" json:"date_created"`
 	DateUpdated *time.Time `valid:"-" gorm:"type:datetime;column:date_updated" json:"date_updated,omitempty"`
 
-	User User `gorm:"foreignkey:UserID" json:"user"`
+	User User `valid:"-" gorm:"foreignkey:UserID" json:"user"`
 }
 
 //AccountList ...
@@ -50,5 +50,5 @@ func (a *Account) BeforeCreate(scope *gorm.Scope) error {
 func (a *Account) BeforeUpdate(scope *gorm.Scope) error {
 	updated := time.Now()
 	scope.SetColumn("date_updated", &updated)
-	return a.IsValid()
+	return nil
 }
