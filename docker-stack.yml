@@ -15,8 +15,7 @@ services:
         - "traefik.docker.network=public"
 
   mysql:
-    image: mysql:5.7
-    command: --sql_mode=""
+    image: mysql:8.0
     volumes:
       - mysql:/var/lib/mysql
     environment:

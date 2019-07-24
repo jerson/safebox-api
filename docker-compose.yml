@@ -14,8 +14,7 @@ services:
         entrypoint: sh
 
     mysql:
-        image: mysql:5.7
-        command: --sql_mode=""
+        image: mysql:8.0
         volumes:
           - ./database:/docker-entrypoint-initdb.d
         environment:
