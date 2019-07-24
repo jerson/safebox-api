@@ -1,5 +1,7 @@
 CREATE DATABASE /*!32312 IF NOT EXISTS */ `safebox` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
+SET GLOBAL sql_mode = '';
+
 CREATE USER IF NOT EXISTS 'safebox'@'localhost'
   IDENTIFIED BY 'safebox';
 GRANT ALL PRIVILEGES ON *.* TO 'safebox'@'localhost'
