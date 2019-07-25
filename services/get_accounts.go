@@ -26,6 +26,7 @@ func (s *Server) GetAccounts(context context.Context, in *AccountsRequest) (*Acc
 	var response []*AccountSingle
 	for _, account := range accounts.Items {
 		response = append(response, &AccountSingle{
+			Id:       account.ID,
 			Hint:     account.Hint,
 			Username: account.Username,
 			Label:    account.Label,
