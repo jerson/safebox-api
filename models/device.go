@@ -38,6 +38,8 @@ func (d *Device) IsValid() error {
 
 //BeforeCreate ...
 func (d *Device) BeforeCreate(scope *gorm.Scope) error {
+	created := time.Now()
+	scope.SetColumn("date_created", created)
 
 	return d.IsValid()
 }
