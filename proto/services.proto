@@ -9,6 +9,8 @@ service Services {
     }
     rpc Login (LoginRequest) returns (AuthResponse) {
     }
+    rpc RefreshToken (RefreshTokenRequest) returns (AuthResponse) {
+    }
     rpc LoginBiometric (LoginBiometricRequest) returns (AuthResponse) {
     }
     rpc Register (RegisterRequest) returns (AuthResponse) {
@@ -24,16 +26,21 @@ service Services {
 
 }
 
-message KeyPairResponse {
-    string publicKey = 1;
-    string privateKey = 2;
-}
-
 message PingRequest {
 }
 
 message PingResponse {
     string name = 1;
+}
+
+
+message RefreshTokenRequest {
+    string accessToken = 1;
+}
+
+message KeyPairResponse {
+    string publicKey = 1;
+    string privateKey = 2;
 }
 
 message LogoutRequest {
@@ -59,9 +66,11 @@ message RegisterRequest {
     string publicKey = 3;
 }
 
-message AuthResponse{
+
+message AuthResponse {
     string accessToken = 1;
-    KeyPairResponse keyPair = 2;
+    string dateExpire = 2;
+    KeyPairResponse keyPair = 3;
 }
 
 message Account {

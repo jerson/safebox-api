@@ -33,16 +33,14 @@ func getUserByToken(ctx context.Context, token string) (*models.User, error) {
 	return user, nil
 }
 
-func getAccessToken(ctx context.Context, user models.User) (string, error) {
-
-	var token string
+func getAuthResponse(ctx context.Context, user models.User) (*AuthResponse, error) {
 
 	repository := repositories.NewAccessTokenRepository(ctx)
 	dateExpire := time.Now().Add(time.Minute * 5)
 
 	randomToken, err := util.GenerateRandomASCIIString(128)
 	if err != nil {
-		return token, err
+		return nil, err
 	}
 	accessTokenInput := models.AccessToken{
 		UserID:     user.ID,
@@ -51,16 +49,23 @@ func getAccessToken(ctx context.Context, user models.User) (string, error) {
 	}
 	accessToken, err := repository.Create(accessTokenInput)
 	if err != nil {
-		return token, err
+		return nil, err
 	}
 
 	userRepo := repositories.NewUserRepository(ctx)
 	err = userRepo.UpdateSingle(user, "date_connected", time.Now())
 	if err != nil {
-		return token, err
+		return nil, err
 	}
 
 	ctx.SetUser(user.ID)
 
-	return accessToken.Token, nil
+	return &AuthResponse{
+		AccessToken: accessToken.Token,
+
+		KeyPair: &KeyPairResponse{
+			PrivateKey: user.PrivateKey,
+			PublicKey:  user.PublicKey,
+		},
+	}, nil
 }

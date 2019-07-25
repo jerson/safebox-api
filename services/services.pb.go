@@ -24,6 +24,115 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type PingRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PingRequest) Reset()         { *m = PingRequest{} }
+func (m *PingRequest) String() string { return proto.CompactTextString(m) }
+func (*PingRequest) ProtoMessage()    {}
+func (*PingRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8e16ccb8c5307b32, []int{0}
+}
+
+func (m *PingRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PingRequest.Unmarshal(m, b)
+}
+func (m *PingRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PingRequest.Marshal(b, m, deterministic)
+}
+func (m *PingRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PingRequest.Merge(m, src)
+}
+func (m *PingRequest) XXX_Size() int {
+	return xxx_messageInfo_PingRequest.Size(m)
+}
+func (m *PingRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PingRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PingRequest proto.InternalMessageInfo
+
+type PingResponse struct {
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PingResponse) Reset()         { *m = PingResponse{} }
+func (m *PingResponse) String() string { return proto.CompactTextString(m) }
+func (*PingResponse) ProtoMessage()    {}
+func (*PingResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8e16ccb8c5307b32, []int{1}
+}
+
+func (m *PingResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PingResponse.Unmarshal(m, b)
+}
+func (m *PingResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PingResponse.Marshal(b, m, deterministic)
+}
+func (m *PingResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PingResponse.Merge(m, src)
+}
+func (m *PingResponse) XXX_Size() int {
+	return xxx_messageInfo_PingResponse.Size(m)
+}
+func (m *PingResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PingResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PingResponse proto.InternalMessageInfo
+
+func (m *PingResponse) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type RefreshTokenRequest struct {
+	AccessToken          string   `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RefreshTokenRequest) Reset()         { *m = RefreshTokenRequest{} }
+func (m *RefreshTokenRequest) String() string { return proto.CompactTextString(m) }
+func (*RefreshTokenRequest) ProtoMessage()    {}
+func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8e16ccb8c5307b32, []int{2}
+}
+
+func (m *RefreshTokenRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RefreshTokenRequest.Unmarshal(m, b)
+}
+func (m *RefreshTokenRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RefreshTokenRequest.Marshal(b, m, deterministic)
+}
+func (m *RefreshTokenRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RefreshTokenRequest.Merge(m, src)
+}
+func (m *RefreshTokenRequest) XXX_Size() int {
+	return xxx_messageInfo_RefreshTokenRequest.Size(m)
+}
+func (m *RefreshTokenRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_RefreshTokenRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RefreshTokenRequest proto.InternalMessageInfo
+
+func (m *RefreshTokenRequest) GetAccessToken() string {
+	if m != nil {
+		return m.AccessToken
+	}
+	return ""
+}
+
 type KeyPairResponse struct {
 	PublicKey            string   `protobuf:"bytes,1,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
 	PrivateKey           string   `protobuf:"bytes,2,opt,name=privateKey,proto3" json:"privateKey,omitempty"`
@@ -36,7 +145,7 @@ func (m *KeyPairResponse) Reset()         { *m = KeyPairResponse{} }
 func (m *KeyPairResponse) String() string { return proto.CompactTextString(m) }
 func (*KeyPairResponse) ProtoMessage()    {}
 func (*KeyPairResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{0}
+	return fileDescriptor_8e16ccb8c5307b32, []int{3}
 }
 
 func (m *KeyPairResponse) XXX_Unmarshal(b []byte) error {
@@ -71,76 +180,6 @@ func (m *KeyPairResponse) GetPrivateKey() string {
 	return ""
 }
 
-type PingRequest struct {
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *PingRequest) Reset()         { *m = PingRequest{} }
-func (m *PingRequest) String() string { return proto.CompactTextString(m) }
-func (*PingRequest) ProtoMessage()    {}
-func (*PingRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{1}
-}
-
-func (m *PingRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PingRequest.Unmarshal(m, b)
-}
-func (m *PingRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PingRequest.Marshal(b, m, deterministic)
-}
-func (m *PingRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PingRequest.Merge(m, src)
-}
-func (m *PingRequest) XXX_Size() int {
-	return xxx_messageInfo_PingRequest.Size(m)
-}
-func (m *PingRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_PingRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PingRequest proto.InternalMessageInfo
-
-type PingResponse struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *PingResponse) Reset()         { *m = PingResponse{} }
-func (m *PingResponse) String() string { return proto.CompactTextString(m) }
-func (*PingResponse) ProtoMessage()    {}
-func (*PingResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{2}
-}
-
-func (m *PingResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PingResponse.Unmarshal(m, b)
-}
-func (m *PingResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PingResponse.Marshal(b, m, deterministic)
-}
-func (m *PingResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PingResponse.Merge(m, src)
-}
-func (m *PingResponse) XXX_Size() int {
-	return xxx_messageInfo_PingResponse.Size(m)
-}
-func (m *PingResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_PingResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PingResponse proto.InternalMessageInfo
-
-func (m *PingResponse) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
 type LogoutRequest struct {
 	AccessToken          string   `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -152,7 +191,7 @@ func (m *LogoutRequest) Reset()         { *m = LogoutRequest{} }
 func (m *LogoutRequest) String() string { return proto.CompactTextString(m) }
 func (*LogoutRequest) ProtoMessage()    {}
 func (*LogoutRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{3}
+	return fileDescriptor_8e16ccb8c5307b32, []int{4}
 }
 
 func (m *LogoutRequest) XXX_Unmarshal(b []byte) error {
@@ -190,7 +229,7 @@ func (m *LogoutResponse) Reset()         { *m = LogoutResponse{} }
 func (m *LogoutResponse) String() string { return proto.CompactTextString(m) }
 func (*LogoutResponse) ProtoMessage()    {}
 func (*LogoutResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{4}
+	return fileDescriptor_8e16ccb8c5307b32, []int{5}
 }
 
 func (m *LogoutResponse) XXX_Unmarshal(b []byte) error {
@@ -223,7 +262,7 @@ func (m *LoginBiometricRequest) Reset()         { *m = LoginBiometricRequest{} }
 func (m *LoginBiometricRequest) String() string { return proto.CompactTextString(m) }
 func (*LoginBiometricRequest) ProtoMessage()    {}
 func (*LoginBiometricRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{5}
+	return fileDescriptor_8e16ccb8c5307b32, []int{6}
 }
 
 func (m *LoginBiometricRequest) XXX_Unmarshal(b []byte) error {
@@ -270,7 +309,7 @@ func (m *LoginRequest) Reset()         { *m = LoginRequest{} }
 func (m *LoginRequest) String() string { return proto.CompactTextString(m) }
 func (*LoginRequest) ProtoMessage()    {}
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{6}
+	return fileDescriptor_8e16ccb8c5307b32, []int{7}
 }
 
 func (m *LoginRequest) XXX_Unmarshal(b []byte) error {
@@ -318,7 +357,7 @@ func (m *RegisterRequest) Reset()         { *m = RegisterRequest{} }
 func (m *RegisterRequest) String() string { return proto.CompactTextString(m) }
 func (*RegisterRequest) ProtoMessage()    {}
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{7}
+	return fileDescriptor_8e16ccb8c5307b32, []int{8}
 }
 
 func (m *RegisterRequest) XXX_Unmarshal(b []byte) error {
@@ -362,7 +401,8 @@ func (m *RegisterRequest) GetPublicKey() string {
 
 type AuthResponse struct {
 	AccessToken          string           `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
-	KeyPair              *KeyPairResponse `protobuf:"bytes,2,opt,name=keyPair,proto3" json:"keyPair,omitempty"`
+	DateExpire           string           `protobuf:"bytes,2,opt,name=dateExpire,proto3" json:"dateExpire,omitempty"`
+	KeyPair              *KeyPairResponse `protobuf:"bytes,3,opt,name=keyPair,proto3" json:"keyPair,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
 	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
@@ -372,7 +412,7 @@ func (m *AuthResponse) Reset()         { *m = AuthResponse{} }
 func (m *AuthResponse) String() string { return proto.CompactTextString(m) }
 func (*AuthResponse) ProtoMessage()    {}
 func (*AuthResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{8}
+	return fileDescriptor_8e16ccb8c5307b32, []int{9}
 }
 
 func (m *AuthResponse) XXX_Unmarshal(b []byte) error {
@@ -400,6 +440,13 @@ func (m *AuthResponse) GetAccessToken() string {
 	return ""
 }
 
+func (m *AuthResponse) GetDateExpire() string {
+	if m != nil {
+		return m.DateExpire
+	}
+	return ""
+}
+
 func (m *AuthResponse) GetKeyPair() *KeyPairResponse {
 	if m != nil {
 		return m.KeyPair
@@ -421,7 +468,7 @@ func (m *Account) Reset()         { *m = Account{} }
 func (m *Account) String() string { return proto.CompactTextString(m) }
 func (*Account) ProtoMessage()    {}
 func (*Account) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{9}
+	return fileDescriptor_8e16ccb8c5307b32, []int{10}
 }
 
 func (m *Account) XXX_Unmarshal(b []byte) error {
@@ -484,7 +531,7 @@ func (m *AccountSingle) Reset()         { *m = AccountSingle{} }
 func (m *AccountSingle) String() string { return proto.CompactTextString(m) }
 func (*AccountSingle) ProtoMessage()    {}
 func (*AccountSingle) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{10}
+	return fileDescriptor_8e16ccb8c5307b32, []int{11}
 }
 
 func (m *AccountSingle) XXX_Unmarshal(b []byte) error {
@@ -545,7 +592,7 @@ func (m *AddAccountRequest) Reset()         { *m = AddAccountRequest{} }
 func (m *AddAccountRequest) String() string { return proto.CompactTextString(m) }
 func (*AddAccountRequest) ProtoMessage()    {}
 func (*AddAccountRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{11}
+	return fileDescriptor_8e16ccb8c5307b32, []int{12}
 }
 
 func (m *AddAccountRequest) XXX_Unmarshal(b []byte) error {
@@ -591,7 +638,7 @@ func (m *AddAccountResponse) Reset()         { *m = AddAccountResponse{} }
 func (m *AddAccountResponse) String() string { return proto.CompactTextString(m) }
 func (*AddAccountResponse) ProtoMessage()    {}
 func (*AddAccountResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{12}
+	return fileDescriptor_8e16ccb8c5307b32, []int{13}
 }
 
 func (m *AddAccountResponse) XXX_Unmarshal(b []byte) error {
@@ -630,7 +677,7 @@ func (m *AccountsRequest) Reset()         { *m = AccountsRequest{} }
 func (m *AccountsRequest) String() string { return proto.CompactTextString(m) }
 func (*AccountsRequest) ProtoMessage()    {}
 func (*AccountsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{13}
+	return fileDescriptor_8e16ccb8c5307b32, []int{14}
 }
 
 func (m *AccountsRequest) XXX_Unmarshal(b []byte) error {
@@ -669,7 +716,7 @@ func (m *AccountsResponse) Reset()         { *m = AccountsResponse{} }
 func (m *AccountsResponse) String() string { return proto.CompactTextString(m) }
 func (*AccountsResponse) ProtoMessage()    {}
 func (*AccountsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{14}
+	return fileDescriptor_8e16ccb8c5307b32, []int{15}
 }
 
 func (m *AccountsResponse) XXX_Unmarshal(b []byte) error {
@@ -709,7 +756,7 @@ func (m *AccountRequest) Reset()         { *m = AccountRequest{} }
 func (m *AccountRequest) String() string { return proto.CompactTextString(m) }
 func (*AccountRequest) ProtoMessage()    {}
 func (*AccountRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{15}
+	return fileDescriptor_8e16ccb8c5307b32, []int{16}
 }
 
 func (m *AccountRequest) XXX_Unmarshal(b []byte) error {
@@ -755,7 +802,7 @@ func (m *AccountResponse) Reset()         { *m = AccountResponse{} }
 func (m *AccountResponse) String() string { return proto.CompactTextString(m) }
 func (*AccountResponse) ProtoMessage()    {}
 func (*AccountResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{16}
+	return fileDescriptor_8e16ccb8c5307b32, []int{17}
 }
 
 func (m *AccountResponse) XXX_Unmarshal(b []byte) error {
@@ -795,7 +842,7 @@ func (m *BuyProductRequest) Reset()         { *m = BuyProductRequest{} }
 func (m *BuyProductRequest) String() string { return proto.CompactTextString(m) }
 func (*BuyProductRequest) ProtoMessage()    {}
 func (*BuyProductRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{17}
+	return fileDescriptor_8e16ccb8c5307b32, []int{18}
 }
 
 func (m *BuyProductRequest) XXX_Unmarshal(b []byte) error {
@@ -841,7 +888,7 @@ func (m *BuyProductResponse) Reset()         { *m = BuyProductResponse{} }
 func (m *BuyProductResponse) String() string { return proto.CompactTextString(m) }
 func (*BuyProductResponse) ProtoMessage()    {}
 func (*BuyProductResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8e16ccb8c5307b32, []int{18}
+	return fileDescriptor_8e16ccb8c5307b32, []int{19}
 }
 
 func (m *BuyProductResponse) XXX_Unmarshal(b []byte) error {
@@ -870,9 +917,10 @@ func (m *BuyProductResponse) GetSuccess() bool {
 }
 
 func init() {
-	proto.RegisterType((*KeyPairResponse)(nil), "KeyPairResponse")
 	proto.RegisterType((*PingRequest)(nil), "PingRequest")
 	proto.RegisterType((*PingResponse)(nil), "PingResponse")
+	proto.RegisterType((*RefreshTokenRequest)(nil), "RefreshTokenRequest")
+	proto.RegisterType((*KeyPairResponse)(nil), "KeyPairResponse")
 	proto.RegisterType((*LogoutRequest)(nil), "LogoutRequest")
 	proto.RegisterType((*LogoutResponse)(nil), "LogoutResponse")
 	proto.RegisterType((*LoginBiometricRequest)(nil), "LoginBiometricRequest")
@@ -894,47 +942,49 @@ func init() {
 func init() { proto.RegisterFile("services.proto", fileDescriptor_8e16ccb8c5307b32) }
 
 var fileDescriptor_8e16ccb8c5307b32 = []byte{
-	// 629 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x55, 0xdd, 0x6a, 0xdb, 0x4c,
-	0x10, 0x95, 0x25, 0x27, 0x56, 0xc6, 0x96, 0xac, 0x4c, 0xbe, 0xaf, 0x18, 0x51, 0x4a, 0x58, 0x5a,
-	0x1a, 0x52, 0xba, 0x90, 0xa4, 0x25, 0xf4, 0xa6, 0x10, 0x5f, 0xb4, 0x94, 0x04, 0x6a, 0x94, 0x42,
-	0x29, 0xf4, 0x46, 0x96, 0x16, 0x65, 0xb1, 0x23, 0xb9, 0x5a, 0x29, 0xc5, 0xef, 0xd8, 0x87, 0x2a,
-	0x96, 0x56, 0xff, 0x49, 0xe3, 0xdc, 0xed, 0xcf, 0xcc, 0x39, 0xb3, 0x33, 0x47, 0x47, 0x60, 0x0a,
-	0x16, 0xdf, 0x71, 0x8f, 0x09, 0xba, 0x8a, 0xa3, 0x24, 0x22, 0x5f, 0x61, 0x7c, 0xc9, 0xd6, 0x33,
-	0x97, 0xc7, 0x0e, 0x13, 0xab, 0x28, 0x14, 0x0c, 0x9f, 0xc3, 0xde, 0x2a, 0x9d, 0x2f, 0xb9, 0x77,
-	0xc9, 0xd6, 0x93, 0xde, 0x61, 0xef, 0x68, 0xcf, 0xa9, 0x0e, 0xf0, 0x05, 0xc0, 0x2a, 0xe6, 0x77,
-	0x6e, 0xc2, 0x36, 0xd7, 0x6a, 0x76, 0x5d, 0x3b, 0x21, 0x06, 0x0c, 0x67, 0x3c, 0x0c, 0x1c, 0xf6,
-	0x2b, 0x65, 0x22, 0x21, 0x04, 0x46, 0xf9, 0x56, 0x82, 0x23, 0xf4, 0x43, 0xf7, 0x96, 0x49, 0xdc,
-	0x6c, 0x4d, 0x4e, 0xc0, 0xb8, 0x8a, 0x82, 0x28, 0x4d, 0x64, 0x12, 0x1e, 0xc2, 0xd0, 0xf5, 0x3c,
-	0x26, 0xc4, 0xb7, 0x68, 0xc1, 0x42, 0x19, 0x5b, 0x3f, 0x22, 0x16, 0x98, 0x45, 0x4a, 0x0e, 0x4c,
-	0xbe, 0xc3, 0xff, 0x57, 0x51, 0xc0, 0xc3, 0x29, 0x8f, 0x6e, 0x59, 0x12, 0x73, 0xaf, 0x00, 0xb3,
-	0x41, 0x4f, 0x05, 0x8b, 0x6b, 0xac, 0xe5, 0x1e, 0x09, 0x8c, 0xe6, 0x45, 0x7c, 0xf5, 0x9c, 0xc6,
-	0x19, 0xf9, 0x04, 0xa3, 0x0c, 0x78, 0x1b, 0x3c, 0x1b, 0xf4, 0x95, 0x2b, 0xc4, 0xef, 0x28, 0xf6,
-	0x25, 0x56, 0xb9, 0x27, 0x0b, 0x18, 0x3b, 0x2c, 0xe0, 0x22, 0x61, 0xf1, 0x36, 0x50, 0x8f, 0xf4,
-	0xb9, 0x39, 0x25, 0xad, 0x35, 0x25, 0xf2, 0x13, 0x46, 0x17, 0x69, 0x72, 0x53, 0xb6, 0xfd, 0xd1,
-	0x8e, 0xe2, 0x31, 0x0c, 0x16, 0xb9, 0x10, 0x32, 0xb2, 0xe1, 0xa9, 0x45, 0x5b, 0xc2, 0x70, 0x8a,
-	0x00, 0xb2, 0x80, 0xc1, 0x85, 0xe7, 0x45, 0x69, 0x98, 0xe0, 0x7f, 0xb0, 0xb3, 0x74, 0xe7, 0x6c,
-	0x29, 0x21, 0xf3, 0x4d, 0xe3, 0x61, 0xea, 0x3f, 0x7a, 0xa4, 0x35, 0x7b, 0xb4, 0x51, 0xc7, 0x0d,
-	0x0f, 0x93, 0x49, 0x3f, 0x57, 0xc7, 0x66, 0x4d, 0x18, 0x18, 0x92, 0xec, 0x9a, 0x87, 0xc1, 0x92,
-	0xa1, 0x09, 0x2a, 0xf7, 0x33, 0x3e, 0xcd, 0x51, 0xb9, 0x5f, 0x95, 0xa0, 0x3e, 0x54, 0x82, 0xd6,
-	0x2a, 0xe1, 0x3e, 0x9a, 0x1f, 0xb0, 0x7f, 0xe1, 0xfb, 0x92, 0x69, 0x6b, 0x21, 0x22, 0x81, 0x81,
-	0x9b, 0xe7, 0xc8, 0xb6, 0xe9, 0xb4, 0xc0, 0x28, 0x2e, 0xc8, 0x4b, 0xc0, 0x3a, 0xb4, 0x1c, 0x49,
-	0xeb, 0x19, 0xe4, 0x0c, 0xc6, 0x32, 0x44, 0x6c, 0xff, 0x1d, 0x7c, 0x04, 0xab, 0x4a, 0x92, 0xc0,
-	0xc7, 0xa0, 0x4b, 0x66, 0x31, 0xe9, 0x1d, 0x6a, 0x47, 0xc3, 0x53, 0x93, 0x36, 0x3a, 0xe8, 0x94,
-	0xf7, 0x64, 0x0a, 0xe6, 0x93, 0x9f, 0x9c, 0x17, 0xae, 0x96, 0x85, 0xbf, 0x2f, 0x0b, 0x2f, 0x4b,
-	0xa8, 0x75, 0xa5, 0xf7, 0x50, 0x57, 0xbe, 0xc0, 0xfe, 0x34, 0x5d, 0xcf, 0xe2, 0xc8, 0x4f, 0xbd,
-	0x27, 0xb0, 0x23, 0xf4, 0xc5, 0x32, 0x0d, 0xe4, 0xb0, 0xb3, 0x35, 0xa1, 0x80, 0x75, 0x28, 0x59,
-	0xc4, 0x04, 0x06, 0x22, 0xcd, 0x32, 0x33, 0x1c, 0xdd, 0x29, 0xb6, 0xa7, 0x7f, 0x34, 0xd0, 0xaf,
-	0xa5, 0x0f, 0xe2, 0x2b, 0xe8, 0x6f, 0x1c, 0x0a, 0x47, 0xb4, 0xe6, 0x5b, 0xb6, 0x41, 0xeb, 0xb6,
-	0x45, 0x14, 0x7c, 0x03, 0xbb, 0xb9, 0xe3, 0xa0, 0x49, 0x1b, 0x6e, 0x65, 0x8f, 0x69, 0xcb, 0x8a,
-	0x14, 0x7c, 0x0d, 0x3b, 0x99, 0x67, 0xa0, 0x41, 0xeb, 0xde, 0x61, 0x1b, 0xb4, 0xfe, 0x55, 0x12,
-	0x05, 0x3f, 0x64, 0x3e, 0x56, 0x73, 0x2d, 0x7c, 0x46, 0xef, 0xb5, 0xb1, 0x6e, 0xea, 0x5b, 0xd0,
-	0x0b, 0x3f, 0x41, 0x8b, 0xb6, 0xac, 0xa5, 0x1b, 0x7e, 0x0e, 0x50, 0x89, 0x10, 0x91, 0x76, 0xc4,
-	0x6e, 0x1f, 0xd0, 0xae, 0x4a, 0x89, 0x82, 0xef, 0x60, 0xf8, 0x99, 0x25, 0x85, 0xca, 0xd0, 0xa2,
-	0x2d, 0x95, 0xda, 0xfb, 0xb4, 0x2d, 0x41, 0xa2, 0xe0, 0x09, 0x40, 0x95, 0x85, 0x63, 0xda, 0xe2,
-	0xb2, 0x68, 0x97, 0xe8, 0x1c, 0xa0, 0x9a, 0x22, 0x22, 0xed, 0xa8, 0xc3, 0x3e, 0xa0, 0xdd, 0x31,
-	0x13, 0x65, 0xbe, 0x9b, 0xfd, 0xca, 0xce, 0xfe, 0x06, 0x00, 0x00, 0xff, 0xff, 0xbd, 0x66, 0x3d,
-	0xfc, 0xdc, 0x06, 0x00, 0x00,
+	// 665 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x55, 0x5d, 0x6b, 0xd4, 0x40,
+	0x14, 0xdd, 0xaf, 0x76, 0xd3, 0xbb, 0x9f, 0xbd, 0xad, 0xb2, 0x04, 0x91, 0x32, 0x28, 0x96, 0x8a,
+	0x03, 0xdd, 0x5a, 0x8a, 0x2f, 0x42, 0x0b, 0x2a, 0xd2, 0x82, 0x25, 0x15, 0xc4, 0xc7, 0x6c, 0x32,
+	0xa6, 0xc3, 0x6e, 0x93, 0x98, 0x49, 0xaa, 0x05, 0xdf, 0xfc, 0xe3, 0xb2, 0x93, 0x49, 0x32, 0x49,
+	0xb6, 0x76, 0xfb, 0x96, 0xf9, 0xb8, 0xe7, 0x9c, 0xb9, 0x73, 0xe6, 0x04, 0x86, 0x82, 0x45, 0xb7,
+	0xdc, 0x61, 0x82, 0x86, 0x51, 0x10, 0x07, 0x64, 0x00, 0xbd, 0x4b, 0xee, 0x7b, 0x16, 0xfb, 0x99,
+	0x30, 0x11, 0x13, 0x02, 0xfd, 0x74, 0x28, 0xc2, 0xc0, 0x17, 0x0c, 0x11, 0x3a, 0xbe, 0x7d, 0xc3,
+	0x26, 0xcd, 0xbd, 0xe6, 0xfe, 0x96, 0x25, 0xbf, 0xc9, 0x09, 0xec, 0x58, 0xec, 0x47, 0xc4, 0xc4,
+	0xf5, 0xd7, 0x60, 0xce, 0x7c, 0x55, 0x8a, 0x7b, 0xd0, 0xb3, 0x1d, 0x87, 0x09, 0x21, 0x67, 0x55,
+	0x85, 0x3e, 0x45, 0xbe, 0xc0, 0xe8, 0x9c, 0xdd, 0x5d, 0xda, 0x3c, 0xca, 0xf1, 0x9f, 0xc1, 0x56,
+	0x98, 0xcc, 0x16, 0xdc, 0x39, 0x67, 0x77, 0xaa, 0xa4, 0x98, 0xc0, 0xe7, 0x00, 0x61, 0xc4, 0x6f,
+	0xed, 0x98, 0x2d, 0x97, 0x5b, 0x72, 0x59, 0x9b, 0x21, 0x87, 0x30, 0xb8, 0x08, 0xbc, 0x20, 0x89,
+	0xd7, 0xd7, 0x30, 0x86, 0x61, 0x56, 0x92, 0x4a, 0x20, 0xdf, 0xe0, 0xc9, 0x45, 0xe0, 0x71, 0xff,
+	0x8c, 0x07, 0x37, 0x2c, 0x8e, 0xb8, 0x93, 0x81, 0x99, 0x60, 0x24, 0x82, 0x45, 0xda, 0xf9, 0xf3,
+	0x31, 0x12, 0xe8, 0xcf, 0xb2, 0xfd, 0x85, 0xb6, 0xd2, 0x1c, 0xf9, 0x08, 0x7d, 0x09, 0xbc, 0x0e,
+	0x9e, 0x09, 0x46, 0x68, 0x0b, 0xf1, 0x2b, 0x88, 0x5c, 0x85, 0x95, 0x8f, 0xc9, 0x1c, 0x46, 0x16,
+	0xf3, 0xb8, 0x88, 0x59, 0xb4, 0x0e, 0xd4, 0x03, 0x4d, 0x2b, 0xb7, 0xbc, 0x5d, 0x69, 0x39, 0xf9,
+	0x03, 0xfd, 0xd3, 0x24, 0xbe, 0xce, 0x2f, 0xe8, 0xc1, 0x8e, 0x2e, 0xf9, 0x5c, 0x3b, 0x66, 0x1f,
+	0x7e, 0x87, 0x3c, 0x62, 0x19, 0x5f, 0x31, 0x83, 0x07, 0xd0, 0x9d, 0xa7, 0xb7, 0x2e, 0xd9, 0x7a,
+	0xd3, 0x31, 0xad, 0xb8, 0xc0, 0xca, 0x36, 0x90, 0x39, 0x74, 0x4f, 0x1d, 0x27, 0x48, 0xfc, 0x18,
+	0x77, 0x61, 0x63, 0x61, 0xcf, 0xd8, 0x42, 0x51, 0xa6, 0x83, 0xd2, 0xc1, 0x5b, 0xff, 0xe9, 0x61,
+	0xbb, 0xdc, 0xc3, 0xa5, 0x8f, 0xaf, 0xb9, 0x1f, 0x4f, 0x3a, 0xa9, 0x8f, 0x97, 0xdf, 0x84, 0xc1,
+	0x40, 0x91, 0x5d, 0x71, 0xdf, 0x5b, 0x30, 0x1c, 0x42, 0x8b, 0xbb, 0x92, 0xaf, 0x6d, 0xb5, 0xb8,
+	0x5b, 0x48, 0x68, 0xdd, 0x27, 0xa1, 0x5d, 0x91, 0xb0, 0x8a, 0xe6, 0x3b, 0x6c, 0x9f, 0xba, 0xae,
+	0x62, 0x5a, 0xdb, 0xa8, 0x48, 0xa0, 0x6b, 0xa7, 0x35, 0x92, 0xbe, 0x37, 0x35, 0x68, 0x86, 0x91,
+	0x2d, 0x90, 0x17, 0x80, 0x3a, 0xb4, 0xba, 0xb2, 0xca, 0x31, 0xc8, 0x11, 0x8c, 0xd4, 0x16, 0xb1,
+	0xfe, 0x3b, 0x79, 0x0f, 0xe3, 0xa2, 0x48, 0x01, 0x1f, 0x80, 0xa1, 0x98, 0xc5, 0xa4, 0xb9, 0xd7,
+	0xde, 0xef, 0x4d, 0x87, 0xb4, 0xd4, 0x41, 0x2b, 0x5f, 0x27, 0x67, 0x30, 0x7c, 0xf4, 0x91, 0x53,
+	0xe1, 0xad, 0x5c, 0xf8, 0x71, 0x2e, 0x3c, 0x97, 0xa0, 0x75, 0xa5, 0x79, 0x5f, 0x57, 0x3e, 0xc3,
+	0xf6, 0x59, 0x72, 0x77, 0x19, 0x05, 0x6e, 0xe2, 0x3c, 0x82, 0x1d, 0xa1, 0x23, 0x16, 0x89, 0xa7,
+	0x2e, 0x5b, 0x7e, 0x13, 0x0a, 0xa8, 0x43, 0x29, 0x11, 0x13, 0xe8, 0x8a, 0x44, 0x56, 0x4a, 0x1c,
+	0xc3, 0xca, 0x86, 0xd3, 0xbf, 0x1d, 0x30, 0xae, 0x54, 0xc0, 0xe2, 0x4b, 0xe8, 0x2c, 0xb3, 0x14,
+	0xfb, 0x54, 0x4b, 0x58, 0x73, 0x40, 0xf5, 0x80, 0x25, 0x0d, 0x7c, 0x0d, 0x9b, 0x69, 0x22, 0xe1,
+	0x90, 0x96, 0xd2, 0xcc, 0x1c, 0xd1, 0x4a, 0x54, 0x35, 0xf0, 0x15, 0x6c, 0xc8, 0x4c, 0xc1, 0x01,
+	0xd5, 0xb3, 0xc5, 0x1c, 0x50, 0xfd, 0xd5, 0x92, 0x06, 0x1e, 0x43, 0x5f, 0x0f, 0x69, 0xdc, 0xa5,
+	0x2b, 0x32, 0xbb, 0x5e, 0xf6, 0x4e, 0xc6, 0xa3, 0x16, 0x86, 0xf8, 0x94, 0xae, 0x4c, 0xc7, 0x7a,
+	0xe9, 0x1b, 0x30, 0xb2, 0x98, 0xc2, 0x31, 0xad, 0x24, 0x56, 0x7d, 0xfb, 0x09, 0x40, 0xe1, 0x5d,
+	0x44, 0x5a, 0x7b, 0x23, 0xe6, 0x0e, 0xad, 0x9b, 0x9b, 0x34, 0xf0, 0x2d, 0xf4, 0x3e, 0xb1, 0x38,
+	0x33, 0x27, 0x8e, 0x69, 0xc5, 0xdc, 0xe6, 0x36, 0xad, 0x3a, 0x97, 0x34, 0xf0, 0x10, 0xa0, 0xa8,
+	0xc2, 0x11, 0xad, 0x70, 0x8d, 0x69, 0x9d, 0xe8, 0x04, 0xa0, 0xb8, 0x7c, 0x44, 0x5a, 0x33, 0x95,
+	0xb9, 0x43, 0xeb, 0xee, 0x20, 0x8d, 0xd9, 0xa6, 0xfc, 0xb5, 0x1e, 0xfd, 0x0b, 0x00, 0x00, 0xff,
+	0xff, 0x60, 0x27, 0xdf, 0x98, 0x6c, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -952,6 +1002,7 @@ type ServicesClient interface {
 	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	LoginBiometric(ctx context.Context, in *LoginBiometricRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AddAccountResponse, error)
@@ -989,6 +1040,15 @@ func (c *servicesClient) Logout(ctx context.Context, in *LogoutRequest, opts ...
 func (c *servicesClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
 	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, "/Services/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *servicesClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, "/Services/RefreshToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1054,6 +1114,7 @@ type ServicesServer interface {
 	Ping(context.Context, *PingRequest) (*PingResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
+	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
 	LoginBiometric(context.Context, *LoginBiometricRequest) (*AuthResponse, error)
 	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
@@ -1074,6 +1135,9 @@ func (*UnimplementedServicesServer) Logout(ctx context.Context, req *LogoutReque
 }
 func (*UnimplementedServicesServer) Login(ctx context.Context, req *LoginRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (*UnimplementedServicesServer) RefreshToken(ctx context.Context, req *RefreshTokenRequest) (*AuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (*UnimplementedServicesServer) LoginBiometric(ctx context.Context, req *LoginBiometricRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginBiometric not implemented")
@@ -1148,6 +1212,24 @@ func _Services_Login_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServicesServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Services_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServicesServer).RefreshToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Services/RefreshToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServicesServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1275,6 +1357,10 @@ var _Services_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _Services_Login_Handler,
+		},
+		{
+			MethodName: "RefreshToken",
+			Handler:    _Services_RefreshToken_Handler,
 		},
 		{
 			MethodName: "LoginBiometric",

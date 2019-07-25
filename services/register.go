@@ -32,16 +32,10 @@ func (s *Server) Register(context context.Context, in *RegisterRequest) (*AuthRe
 		return nil, err
 	}
 
-	accessToken, err := getAccessToken(ctx, *user)
+	response, err := getAuthResponse(ctx, *user)
 	if err != nil {
 		return nil, err
 	}
 
-	return &AuthResponse{
-		AccessToken: accessToken,
-		KeyPair: &KeyPairResponse{
-			PrivateKey: user.PrivateKey,
-			PublicKey:  user.PublicKey,
-		},
-	}, nil
+	return response, nil
 }
