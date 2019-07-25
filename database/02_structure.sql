@@ -97,17 +97,18 @@ DROP TABLE IF EXISTS `device`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `device` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) NOT NULL,
-  `hash` varchar(250) NOT NULL,
-  `public_key` text,
+  `name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `hash` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `public_key` text COLLATE utf8mb4_general_ci NOT NULL,
   `user_id` bigint(20) NOT NULL,
+  `date_created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `hash_UNIQUE` (`hash`),
   KEY `hash_idx` (`hash`),
   KEY `fk_device_1_idx` (`user_id`),
   CONSTRAINT `fk_device_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,4 +179,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-25 15:17:32
+-- Dump completed on 2019-07-25 16:11:29
