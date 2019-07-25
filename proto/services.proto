@@ -7,9 +7,11 @@ service Services {
 
     rpc Logout (LogoutRequest) returns (LogoutResponse) {
     }
-    rpc Login (LoginRequest) returns (LoginResponse) {
+    rpc Login (LoginRequest) returns (AuthResponse) {
     }
-    rpc Register (RegisterRequest) returns (RegisterResponse) {
+    rpc LoginBiometric (LoginBiometricRequest) returns (AuthResponse) {
+    }
+    rpc Register (RegisterRequest) returns (AuthResponse) {
     }
     rpc AddAccount (AddAccountRequest) returns (AddAccountResponse) {
     }
@@ -20,6 +22,11 @@ service Services {
     rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
     }
 
+}
+
+message KeyPairResponse {
+    string publicKey = 1;
+    string privateKey = 2;
 }
 
 message PingRequest {
@@ -36,13 +43,14 @@ message LogoutRequest {
 message LogoutResponse {
 }
 
+message LoginBiometricRequest {
+    string username = 1;
+    string biometricKey = 2;
+}
+
 message LoginRequest {
     string username = 1;
     string password = 2;
-}
-
-message LoginResponse {
-    string accessToken = 1;
 }
 
 message RegisterRequest {
@@ -50,9 +58,10 @@ message RegisterRequest {
     string privateKey = 2;
     string publicKey = 3;
 }
-message RegisterResponse {
-    bool success = 1;
-    string accessToken = 2;
+
+message AuthResponse{
+    string accessToken = 1;
+    KeyPairResponse keyPair = 2;
 }
 
 message Account {

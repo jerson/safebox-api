@@ -2,32 +2,27 @@ package services
 
 import (
 	"context"
-	"errors"
-	"safebox.jerson.dev/api/models"
 	appContext "safebox.jerson.dev/api/modules/context"
+	"safebox.jerson.dev/api/modules/openpgp"
 	"safebox.jerson.dev/api/repositories"
 )
 
-// Register ...
-func (s *Server) Register(context context.Context, in *RegisterRequest) (*AuthResponse, error) {
+// LoginBiometric ...
+func (s *Server) LoginBiometric(context context.Context, in *LoginBiometricRequest) (*AuthResponse, error) {
 
-	ctx := appContext.NewContext(context, "Register")
+	ctx := appContext.NewContext(context, "Login")
 	defer ctx.Close()
 
 	repository := repositories.NewUserRepository(ctx)
 
-	user, _ := repository.FindOneByUsername(in.Username)
-	if user != nil {
-		return nil, errors.New("already registered")
+	user, err := repository.FindOneByUsername(in.Username)
+	if err != nil {
+		return nil, err
 	}
 
-	userInput := models.User{
-		PrivateKey: in.PrivateKey,
-		PublicKey:  in.PublicKey,
-		Username:   in.Username,
-	}
-
-	user, err := repository.Create(userInput)
+	pgp := openpgp.NewOpenPGP()
+	// FIXME aqui debe implementarse biometric publicKey
+	_, err = pgp.ReadPrivateKey(user.PrivateKey, in.Username)
 	if err != nil {
 		return nil, err
 	}

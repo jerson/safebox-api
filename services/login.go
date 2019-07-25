@@ -8,7 +8,7 @@ import (
 )
 
 // Login ...
-func (s *Server) Login(context context.Context, in *LoginRequest) (*LoginResponse, error) {
+func (s *Server) Login(context context.Context, in *LoginRequest) (*AuthResponse, error) {
 
 	ctx := appContext.NewContext(context, "Login")
 	defer ctx.Close()
@@ -31,5 +31,11 @@ func (s *Server) Login(context context.Context, in *LoginRequest) (*LoginRespons
 		return nil, err
 	}
 
-	return &LoginResponse{AccessToken: accessToken}, nil
+	return &AuthResponse{
+		AccessToken: accessToken,
+		KeyPair: &KeyPairResponse{
+			PrivateKey: user.PrivateKey,
+			PublicKey:  user.PublicKey,
+		},
+	}, nil
 }
