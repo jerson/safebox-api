@@ -32,6 +32,7 @@ func migrate(ctx context.Context) {
 		&models.Product{},
 		&models.Purchase{},
 		&models.User{},
+		&models.Device{},
 	)
 }
 

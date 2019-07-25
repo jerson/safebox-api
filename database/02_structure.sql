@@ -32,7 +32,7 @@ CREATE TABLE `access_token` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `date_created` datetime NOT NULL,
   `date_expire` datetime DEFAULT NULL,
-  `token` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `token` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
@@ -40,7 +40,7 @@ CREATE TABLE `access_token` (
   KEY `token_IDX` (`token`),
   KEY `fk_access_token_1_idx` (`user_id`),
   CONSTRAINT `fk_access_token_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,17 +53,17 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `label` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `label` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
   `username` text COLLATE utf8mb4_general_ci NOT NULL,
   `hint` text COLLATE utf8mb4_general_ci,
-  `password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` text COLLATE utf8mb4_general_ci NOT NULL,
   `date_created` datetime NOT NULL,
   `date_updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_account_1_idx` (`user_id`),
   CONSTRAINT `fk_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,9 +76,9 @@ DROP TABLE IF EXISTS `audit_log`;
 CREATE TABLE `audit_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
-  `ip` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `action` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `ip` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `action` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `payload` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idaudit_log_UNIQUE` (`id`),
   KEY `idx_ip` (`ip`),
@@ -86,6 +86,28 @@ CREATE TABLE `audit_log` (
   KEY `fk_audit_log_1_idx` (`user_id`),
   CONSTRAINT `fk_audit_log_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `device`
+--
+
+DROP TABLE IF EXISTS `device`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `device` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) NOT NULL,
+  `hash` varchar(250) NOT NULL,
+  `public_key` text,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `hash_UNIQUE` (`hash`),
+  KEY `hash_idx` (`hash`),
+  KEY `fk_device_1_idx` (`user_id`),
+  CONSTRAINT `fk_device_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,9 +119,9 @@ DROP TABLE IF EXISTS `product`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `slug` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `slug` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug_UNIQUE` (`slug`),
   UNIQUE KEY `id_UNIQUE` (`id`)
@@ -117,7 +139,7 @@ CREATE TABLE `purchase` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `product_id` bigint(20) NOT NULL,
-  `payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `payload` text COLLATE utf8mb4_general_ci,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idpurchase_UNIQUE` (`id`),
@@ -137,14 +159,14 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `private_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `private_key` text COLLATE utf8mb4_general_ci NOT NULL,
   `date_created` datetime NOT NULL,
   `date_connected` datetime DEFAULT NULL,
-  `public_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `public_key` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -156,4 +178,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-25  0:06:00
+-- Dump completed on 2019-07-25 15:17:32

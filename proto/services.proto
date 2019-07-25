@@ -5,22 +5,33 @@ service Services {
     rpc Ping (PingRequest) returns (PingResponse) {
     }
 
-    rpc Logout (LogoutRequest) returns (LogoutResponse) {
+    rpc AddDevice (AddDeviceRequest) returns (AddDeviceResponse) {
     }
+    rpc DeleteDevice (DeleteDeviceRequest) returns (DeleteDeviceResponse) {
+    }
+    rpc GetDevices (DevicesRequest) returns (DevicesResponse) {
+    }
+
     rpc Login (LoginRequest) returns (AuthResponse) {
+    }
+    rpc LoginWithDevice (LoginDeviceRequest) returns (AuthResponse) {
+    }
+    rpc Logout (LogoutRequest) returns (LogoutResponse) {
     }
     rpc RefreshToken (RefreshTokenRequest) returns (AuthResponse) {
     }
-    rpc LoginBiometric (LoginBiometricRequest) returns (AuthResponse) {
-    }
     rpc Register (RegisterRequest) returns (AuthResponse) {
     }
+
     rpc AddAccount (AddAccountRequest) returns (AddAccountResponse) {
+    }
+    rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountResponse) {
     }
     rpc GetAccounts (AccountsRequest) returns (AccountsResponse) {
     }
     rpc GetAccount (AccountRequest) returns (AccountResponse) {
     }
+
     rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
     }
 
@@ -33,6 +44,40 @@ message PingResponse {
     string name = 1;
 }
 
+
+message AddDeviceRequest {
+    string accessToken = 1;
+    string name = 2;
+    string publicKey = 3;
+}
+message AddDeviceResponse {
+    int64 id = 1;
+}
+message DeleteDeviceRequest {
+    string accessToken = 1;
+    int64 id = 2;
+}
+message DeleteDeviceResponse {
+    bool success = 1;
+}
+message Device {
+    int64 id = 1;
+    string name = 2;
+    string dateCreated = 3;
+}
+message DevicesRequest {
+    string accessToken = 1;
+}
+message DevicesResponse {
+    repeated Device devices = 1;
+}
+message DeleteAccountRequest {
+    string accessToken = 1;
+    int64 id = 2;
+}
+message DeleteAccountResponse {
+    bool success = 1;
+}
 
 message RefreshTokenRequest {
     string accessToken = 1;
@@ -50,9 +95,8 @@ message LogoutRequest {
 message LogoutResponse {
 }
 
-message LoginBiometricRequest {
-    string username = 1;
-    string biometricKey = 2;
+message LoginDeviceRequest {
+    string publicKey = 1;
 }
 
 message LoginRequest {

@@ -18,7 +18,7 @@ func (s *Server) GetAccounts(context context.Context, in *AccountsRequest) (*Acc
 	}
 
 	repository := repositories.NewAccountRepository(ctx)
-	accounts, err := repository.ListByUserID(user.ID, 0, 100, "id", "desc")
+	accounts, err := repository.ListByUserID(user.ID, 0, 1000, "id", "desc")
 	if err != nil {
 		return nil, err
 	}

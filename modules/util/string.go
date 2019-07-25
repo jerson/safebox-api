@@ -2,6 +2,8 @@ package util
 
 import (
 	"crypto/rand"
+	"crypto/sha512"
+	"encoding/base64"
 	"github.com/rs/xid"
 	"math/big"
 )
@@ -33,4 +35,12 @@ func GenerateRandomASCIIString(length int) (string, error) {
 			result += string(n)
 		}
 	}
+}
+
+// SHA512 ...
+func SHA512(input string) string {
+	hasher := sha512.New()
+	hasher.Write([]byte(input))
+	return base64.URLEncoding.EncodeToString(hasher.Sum(nil))
+
 }

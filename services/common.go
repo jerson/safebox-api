@@ -9,6 +9,26 @@ import (
 	"time"
 )
 
+func getUserByDevice(ctx context.Context, publicKey string) (*models.User, error) {
+
+	hash := util.SHA512(publicKey)
+	repository := repositories.NewDeviceRepository(ctx)
+	device, err := repository.FindOneByHash(hash)
+	if err != nil {
+		return nil, err
+	}
+
+	userRepository := repositories.NewUserRepository(ctx)
+	user, err := userRepository.FindOneByID(device.UserID)
+	if err != nil {
+		return nil, err
+	}
+
+	ctx.SetUser(user.ID)
+
+	return user, nil
+}
+
 func getUserByToken(ctx context.Context, token string) (*models.User, error) {
 
 	repository := repositories.NewAccessTokenRepository(ctx)
@@ -19,7 +39,7 @@ func getUserByToken(ctx context.Context, token string) (*models.User, error) {
 
 	diff := accessToken.DateExpire.Sub(time.Now())
 	if diff < time.Second*0 {
-		return nil, errors.New("expired token")
+		return nil, errors.New("expired session, login again please")
 	}
 
 	userRepository := repositories.NewUserRepository(ctx)
@@ -62,7 +82,7 @@ func getAuthResponse(ctx context.Context, user models.User) (*AuthResponse, erro
 
 	return &AuthResponse{
 		AccessToken: accessToken.Token,
-
+		DateExpire:  accessToken.DateExpire.Format(time.RFC3339),
 		KeyPair: &KeyPairResponse{
 			PrivateKey: user.PrivateKey,
 			PublicKey:  user.PublicKey,
