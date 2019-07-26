@@ -114,7 +114,8 @@ message RegisterRequest {
 message AuthResponse {
     string accessToken = 1;
     string dateExpire = 2;
-    KeyPairResponse keyPair = 3;
+    string date = 3;
+    KeyPairResponse keyPair = 4;
 }
 
 message Account {
