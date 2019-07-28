@@ -58,10 +58,8 @@ func getAuthResponse(ctx context.Context, user models.User) (*AuthResponse, erro
 	repository := repositories.NewAccessTokenRepository(ctx)
 	dateExpire := time.Now().Add(time.Minute * 5)
 
-	randomToken, err := util.GenerateRandomASCIIString(128)
-	if err != nil {
-		return nil, err
-	}
+	randomToken := util.UniqueID()
+
 	accessTokenInput := models.AccessToken{
 		UserID:     user.ID,
 		DateExpire: &dateExpire,
@@ -83,7 +81,7 @@ func getAuthResponse(ctx context.Context, user models.User) (*AuthResponse, erro
 	return &AuthResponse{
 		AccessToken: accessToken.Token,
 		DateExpire:  accessToken.DateExpire.Format(time.RFC3339),
-		Date:  time.Now().Format(time.RFC3339),
+		Date:        time.Now().Format(time.RFC3339),
 		KeyPair: &KeyPairResponse{
 			PrivateKey: user.PrivateKey,
 			PublicKey:  user.PublicKey,
