@@ -29,6 +29,7 @@ func (s *Server) GetDevices(context context.Context, in *DevicesRequest) (*Devic
 		response = append(response, &Device{
 			Name:        device.Name,
 			Id:          device.ID,
+			Uid:         device.UID,
 			DateCreated: device.DateCreated.Format(time.RFC3339),
 		})
 	}

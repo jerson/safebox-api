@@ -83,7 +83,7 @@ func getAuthResponse(ctx context.Context, user models.User) (*AuthResponse, erro
 	return &AuthResponse{
 		AccessToken: accessToken.Token,
 		DateExpire:  accessToken.DateExpire.Format(time.RFC3339),
-		Date:  time.Now().Format(time.RFC3339),
+		Date:        time.Now().Format(time.RFC3339),
 		KeyPair: &KeyPairResponse{
 			PrivateKey: user.PrivateKey,
 			PublicKey:  user.PublicKey,

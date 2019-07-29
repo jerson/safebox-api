@@ -62,6 +62,7 @@ CREATE TABLE `account` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `idx` (`user_id`,`username`),
+  KEY `fk_account_1_idx` (`user_id`),
   CONSTRAINT `fk_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -102,6 +103,7 @@ CREATE TABLE `device` (
   `public_key` text NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `date_created` datetime NOT NULL,
+  `uid` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `hash_UNIQUE` (`hash`),
@@ -179,4 +181,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-26  0:01:39
+-- Dump completed on 2019-07-29 18:30:10

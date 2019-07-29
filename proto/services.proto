@@ -49,6 +49,7 @@ message AddDeviceRequest {
     string accessToken = 1;
     string name = 2;
     string publicKey = 3;
+    string uid = 4;
 }
 message AddDeviceResponse {
     int64 id = 1;
@@ -64,6 +65,7 @@ message Device {
     int64 id = 1;
     string name = 2;
     string dateCreated = 3;
+    string uid = 4;
 }
 message DevicesRequest {
     string accessToken = 1;

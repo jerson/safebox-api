@@ -25,6 +25,7 @@ func (s *Server) AddDevice(context context.Context, in *AddDeviceRequest) (*AddD
 		UserID:    user.ID,
 		PublicKey: in.PublicKey,
 		Name:      in.Name,
+		UID:       in.Uid,
 		Hash:      hash,
 	}
 
