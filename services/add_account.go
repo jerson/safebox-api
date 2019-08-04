@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"errors"
 	"safebox.jerson.dev/api/models"
 	appContext "safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/repositories"
@@ -13,9 +14,12 @@ func (s *Server) AddAccount(context context.Context, in *AddAccountRequest) (*Ad
 	ctx := appContext.NewContext(context, "AddAccount")
 	defer ctx.Close()
 
+	log := ctx.GetLogger("RPC")
+
 	user, err := getUserByToken(ctx, in.AccessToken)
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("session has expired")
 	}
 
 	repository := repositories.NewAccountRepository(ctx)
@@ -29,7 +33,8 @@ func (s *Server) AddAccount(context context.Context, in *AddAccountRequest) (*Ad
 
 	account, err := repository.Create(accountInput)
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("there was a problem, try again later")
 	}
 
 	return &AddAccountResponse{Id: account.ID}, nil

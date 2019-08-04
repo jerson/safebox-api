@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"errors"
 	"safebox.jerson.dev/api/models"
 	appContext "safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/util"
@@ -14,9 +15,12 @@ func (s *Server) AddDevice(context context.Context, in *AddDeviceRequest) (*AddD
 	ctx := appContext.NewContext(context, "AddDevice")
 	defer ctx.Close()
 
+	log := ctx.GetLogger("RPC")
+
 	user, err := getUserByToken(ctx, in.AccessToken)
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("session has expired")
 	}
 
 	hash := util.SHA512(in.PublicKey)
@@ -31,7 +35,8 @@ func (s *Server) AddDevice(context context.Context, in *AddDeviceRequest) (*AddD
 
 	device, err := repository.Create(deviceInput)
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("there was a problem, try again later")
 	}
 
 	return &AddDeviceResponse{Id: device.ID}, nil

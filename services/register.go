@@ -14,10 +14,13 @@ func (s *Server) Register(context context.Context, in *RegisterRequest) (*AuthRe
 	ctx := appContext.NewContext(context, "Register")
 	defer ctx.Close()
 
+	log := ctx.GetLogger("RPC")
+
 	repository := repositories.NewUserRepository(ctx)
 
-	user, _ := repository.FindOneByUsername(in.Username)
-	if user != nil {
+	userFound, err := repository.FindOneByUsername(in.Username)
+	if userFound != nil {
+		log.Error(err)
 		return nil, errors.New("already registered")
 	}
 
@@ -29,12 +32,14 @@ func (s *Server) Register(context context.Context, in *RegisterRequest) (*AuthRe
 
 	user, err := repository.Create(userInput)
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("there was a problem, try again later")
 	}
 
 	response, err := getAuthResponse(ctx, *user)
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("there was a problem, try again later")
 	}
 
 	return response, nil

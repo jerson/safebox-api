@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"errors"
 	appContext "safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/repositories"
 	"time"
@@ -13,15 +14,19 @@ func (s *Server) GetDevices(context context.Context, in *DevicesRequest) (*Devic
 	ctx := appContext.NewContext(context, "GetDevices")
 	defer ctx.Close()
 
+	log := ctx.GetLogger("RPC")
+
 	user, err := getUserByToken(ctx, in.AccessToken)
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("session has expired")
 	}
 
 	repository := repositories.NewDeviceRepository(ctx)
 	accounts, err := repository.ListByUserID(user.ID, 0, 1000, "id", "desc")
 	if err != nil {
-		return nil, err
+		log.Error(err)
+		return nil, errors.New("there was a problem, try again later")
 	}
 
 	var response []*Device
