@@ -8,24 +8,24 @@ import (
 
 //Account ...
 type Account struct {
-	ID          int64      `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" json:"id"`
-	UserID      int64      `valid:"required" gorm:"type:bigint(20);not null;index:fk_account_1_idx;column:user_id" json:"user_id"`
-	Label       string     `valid:"runelength(1|50)~Label must have at least 1 character,required~Label is required" gorm:"type:varchar(250);not null;column:label" json:"label"`
-	Username    string     `valid:"required~Username is required" gorm:"type:varchar(250);not null;column:username" json:"username"`
-	Hint        string     `valid:"-" gorm:"type:varchar(250);column:hint" json:"hint,omitempty"`
-	Password    string     `valid:"required~Password is required" gorm:"type:text;not null;column:password" json:"password"`
-	DateCreated time.Time  `valid:"-" gorm:"type:datetime;not null;column:date_created" json:"date_created"`
-	DateUpdated *time.Time `valid:"-" gorm:"type:datetime;column:date_updated" json:"date_updated,omitempty"`
+	ID          int64      `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id"`
+	UserID      int64      `valid:"required" gorm:"type:bigint(20);not null;index:fk_account_1_idx;column:user_id"`
+	Label       string     `valid:"runelength(1|50)~Label must have at least 1 character,required~Label is required" gorm:"type:varchar(250);not null;column:label"`
+	Username    string     `valid:"required~Username is required" gorm:"type:varchar(250);not null;column:username"`
+	Hint        string     `valid:"-" gorm:"type:varchar(250);column:hint"`
+	Password    string     `valid:"required~Password is required" gorm:"type:text;not null;column:password"`
+	DateCreated time.Time  `valid:"-" gorm:"type:datetime;not null;column:date_created"`
+	DateUpdated *time.Time `valid:"-" gorm:"type:datetime;column:date_updated"`
 
-	User User `valid:"-" gorm:"foreignkey:UserID" json:"user"`
+	User User `valid:"-" gorm:"foreignkey:UserID"`
 }
 
 //AccountList ...
 type AccountList struct {
-	Total  int       `json:"total"`
-	Limit  int       `json:"limit"`
-	Offset int       `json:"offset"`
-	Items  []Account `json:"items"`
+	Total  int
+	Limit  int
+	Offset int
+	Items  []Account
 }
 
 //TableName ...

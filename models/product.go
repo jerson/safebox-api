@@ -8,18 +8,18 @@ import (
 
 //Product ...
 type Product struct {
-	ID          int64  `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" json:"id"`
-	Slug        string `valid:"-" gorm:"type:varchar(250);unique;not null;unique_index:slug_UNIQUE;column:slug" json:"slug"`
-	Name        string `valid:"required" gorm:"type:varchar(45);not null;column:name" json:"name"`
-	Description string `valid:"-" gorm:"type:text;column:description" json:"description,omitempty"`
+	ID          int64  `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id"`
+	Slug        string `valid:"-" gorm:"type:varchar(250);unique;not null;unique_index:slug_UNIQUE;column:slug"`
+	Name        string `valid:"required" gorm:"type:varchar(45);not null;column:name"`
+	Description string `valid:"-" gorm:"type:text;column:description"`
 }
 
 //ProductList ...
 type ProductList struct {
-	Total  int       `json:"total"`
-	Limit  int       `json:"limit"`
-	Offset int       `json:"offset"`
-	Items  []Product `json:"items"`
+	Total  int
+	Limit  int
+	Offset int
+	Items  []Product
 }
 
 //TableName ...

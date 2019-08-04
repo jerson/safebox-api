@@ -42,16 +42,6 @@ LOCK TABLES `account` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `audit_log`
---
--- WHERE:  true LIMIT 50
-
-LOCK TABLES `audit_log` WRITE;
-/*!40000 ALTER TABLE `audit_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `audit_log` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `device`
 --
 -- WHERE:  true LIMIT 50
@@ -90,6 +80,16 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping data for table `user_location`
+--
+-- WHERE:  true LIMIT 50
+
+LOCK TABLES `user_location` WRITE;
+/*!40000 ALTER TABLE `user_location` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_location` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -100,4 +100,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-29 18:30:10
+-- Dump completed on 2019-08-04  0:34:40

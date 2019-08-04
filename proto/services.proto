@@ -35,6 +35,13 @@ service Services {
     rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
     }
 
+    rpc TrackLocation (TrackLocationRequest) returns (TrackLocationResponse) {
+    }
+    rpc EnableLocation (EnableLocationRequest) returns (EnableLocationResponse) {
+    }
+    rpc DisableLocation (DisableLocationRequest) returns (DisableLocationResponse) {
+    }
+
 }
 
 message PingRequest {

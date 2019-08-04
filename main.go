@@ -28,7 +28,7 @@ func migrate(ctx context.Context) {
 	cn.AutoMigrate(
 		&models.AccessToken{},
 		&models.Account{},
-		&models.AuditLog{},
+		&models.UserLocation{},
 		&models.Product{},
 		&models.Purchase{},
 		&models.User{},

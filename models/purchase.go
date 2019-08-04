@@ -8,22 +8,22 @@ import (
 
 //Purchase ...
 type Purchase struct {
-	ID        int64     `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:idpurchase_UNIQUE;column:id" json:"id"`
-	UserID    int64     `valid:"required" gorm:"type:bigint(20);not null;unique_index:user_id_UNIQUE;column:user_id" json:"user_id"`
-	ProductID int64     `valid:"required" gorm:"type:bigint(20);not null;unique_index:user_id_UNIQUE;index:fk_purchase_2_idx;column:product_id" json:"product_id"`
-	Payload   string    `valid:"required" gorm:"type:text;column:payload" json:"payload,omitempty"`
-	Date      time.Time `valid:"-" gorm:"type:datetime;not null;column:date" json:"date"`
+	ID        int64     `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:idpurchase_UNIQUE;column:id"`
+	UserID    int64     `valid:"required" gorm:"type:bigint(20);not null;unique_index:user_id_UNIQUE;column:user_id"`
+	ProductID int64     `valid:"required" gorm:"type:bigint(20);not null;unique_index:user_id_UNIQUE;index:fk_purchase_2_idx;column:product_id"`
+	Payload   string    `valid:"required" gorm:"type:text;column:payload"`
+	Date      time.Time `valid:"-" gorm:"type:datetime;not null;column:date"`
 
-	User    User    `valid:"-" gorm:"foreignkey:UserID" json:"user"`
-	Product Product `valid:"-" gorm:"foreignkey:ProductID" json:"product"`
+	User    User    `valid:"-" gorm:"foreignkey:UserID"`
+	Product Product `valid:"-" gorm:"foreignkey:ProductID"`
 }
 
 //PurchaseList ...
 type PurchaseList struct {
-	Total  int        `json:"total"`
-	Limit  int        `json:"limit"`
-	Offset int        `json:"offset"`
-	Items  []Purchase `json:"items"`
+	Total  int
+	Limit  int
+	Offset int
+	Items  []Purchase
 }
 
 //TableName ...

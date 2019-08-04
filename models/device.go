@@ -8,23 +8,23 @@ import (
 
 //Device ...
 type Device struct {
-	ID          int64     `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" json:"id"`
-	Name        string    `valid:"required" gorm:"type:varchar(250);not null;column:name" json:"name"`
-	UID         string    `valid:"required" gorm:"type:varchar(250);not null;column:uid" json:"uid"`
-	PublicKey   string    `valid:"required" gorm:"type:text;column:public_key" json:"public_key,omitempty"`
-	Hash        string    `valid:"-" gorm:"type:varchar(250);unique;not null;unique_index:hash_UNIQUE;index:hash_idx;column:hash" json:"hash"`
-	UserID      int64     `valid:"required" gorm:"type:bigint(20);not null;index:fk_device_1_idx;column:user_id" json:"user_id"`
-	DateCreated time.Time `valid:"-" gorm:"type:datetime;not null;column:date_created" json:"date_created"`
+	ID          int64     `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id"`
+	Name        string    `valid:"required" gorm:"type:varchar(250);not null;column:name"`
+	UID         string    `valid:"required" gorm:"type:varchar(250);not null;column:uid"`
+	PublicKey   string    `valid:"required" gorm:"type:text;column:public_key"`
+	Hash        string    `valid:"-" gorm:"type:varchar(250);unique;not null;unique_index:hash_UNIQUE;index:hash_idx;column:hash"`
+	UserID      int64     `valid:"required" gorm:"type:bigint(20);not null;index:fk_device_1_idx;column:user_id"`
+	DateCreated time.Time `valid:"-" gorm:"type:datetime;not null;column:date_created"`
 
-	User User `valid:"-" gorm:"foreignkey:UserID" json:"user"`
+	User User `valid:"-" gorm:"foreignkey:UserID"`
 }
 
 //DeviceList ...
 type DeviceList struct {
-	Total  int      `json:"total"`
-	Limit  int      `json:"limit"`
-	Offset int      `json:"offset"`
-	Items  []Device `json:"items"`
+	Total  int
+	Limit  int
+	Offset int
+	Items  []Device
 }
 
 //TableName ...

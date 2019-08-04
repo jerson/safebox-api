@@ -8,20 +8,22 @@ import (
 
 //User ...
 type User struct {
-	ID            int64      `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;column:id" json:"id"`
-	Username      string     `valid:"runelength(4|30)~Username must be at least 4 characters,required~Username is required" gorm:"type:varchar(45);unique;not null;unique_index:username_UNIQUE;column:username" json:"username"`
-	PrivateKey    string     `valid:"required~Error generating keys for password" gorm:"type:text;not null;column:private_key" json:"private_key"`
-	PublicKey     string     `valid:"required~Error generating keys for password" gorm:"type:text;not null;column:public_key" json:"public_key"`
-	DateCreated   time.Time  `valid:"-" gorm:"type:datetime;not null;column:date_created" json:"date_created"`
-	DateConnected *time.Time `valid:"-" gorm:"type:datetime;column:date_connected" json:"date_connected,omitempty"`
+	ID              int64      `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;column:id"`
+	Username        string     `valid:"runelength(4|30)~Username must be at least 4 characters,required~Username is required" gorm:"type:varchar(45);unique;not null;unique_index:username_UNIQUE;column:username"`
+	PrivateKey      string     `valid:"required~Error generating keys for password" gorm:"type:text;not null;column:private_key"`
+	PublicKey       string     `valid:"required~Error generating keys for password" gorm:"type:text;not null;column:public_key"`
+	Email           string     `valid:"email~Invalid email,optional" gorm:"type:varchar(191);column:email"`
+	LocationEnabled bool       `valid:"optional" gorm:"type:tinyint(1);column:location_enabled"`
+	DateCreated     time.Time  `valid:"-" gorm:"type:datetime;not null;column:date_created"`
+	DateConnected   *time.Time `valid:"-" gorm:"type:datetime;column:date_connected"`
 }
 
 //UserList ...
 type UserList struct {
-	Total  int    `json:"total"`
-	Limit  int    `json:"limit"`
-	Offset int    `json:"offset"`
-	Items  []User `json:"items"`
+	Total  int
+	Limit  int
+	Offset int
+	Items  []User
 }
 
 //TableName ...
