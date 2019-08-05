@@ -35,13 +35,34 @@ service Services {
     rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
     }
 
-    rpc TrackLocation (TrackLocationRequest) returns (TrackLocationResponse) {
+    rpc SendLocation (SendLocationRequest) returns (SendLocationResponse) {
     }
     rpc EnableLocation (EnableLocationRequest) returns (EnableLocationResponse) {
     }
     rpc DisableLocation (DisableLocationRequest) returns (DisableLocationResponse) {
     }
 
+}
+
+message DisableLocationRequest {
+    string accessToken = 1;
+}
+message DisableLocationResponse {
+}
+
+message EnableLocationRequest {
+    string accessToken = 1;
+    string email = 2;
+}
+message EnableLocationResponse {
+}
+
+message SendLocationRequest {
+    string accessToken = 1;
+    string latitude = 2;
+    string longitude = 3;
+}
+message SendLocationResponse {
 }
 
 message PingRequest {

@@ -55,6 +55,11 @@ func (u UserLocationRepository) FindOneByID(ID int64) (*models.UserLocation, err
 	return u.FindOne("id = ?", ID)
 }
 
+//FindOneByUserID ...
+func (u UserLocationRepository) FindOneByUserID(ID int64) (*models.UserLocation, error) {
+	return u.FindOne("user_id = ?", ID)
+}
+
 //Create ...
 func (u UserLocationRepository) Create(object models.UserLocation) (*models.UserLocation, error) {
 

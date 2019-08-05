@@ -8,9 +8,11 @@ import (
 
 //UserLocation ...
 type UserLocation struct {
-	ID     int64     `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" `
-	UserID int64     `valid:"required" gorm:"type:bigint(20);unique;not null;unique_index:user_id_UNIQUE;column:user_id" `
-	Date   time.Time `valid:"-" gorm:"type:datetime;not null;column:date"`
+	ID        int64     `valid:"-" gorm:"primary_key;auto_increment;type:bigint(20);not null;unique_index:id_UNIQUE;column:id" `
+	UserID    int64     `valid:"required" gorm:"type:bigint(20);unique;not null;unique_index:user_id_UNIQUE;column:user_id" `
+	Date      time.Time `valid:"-" gorm:"type:datetime;not null;column:date"`
+	Latitude  string    `valid:"required" gorm:"type:varchar(45);not null;column:latitude"`
+	Longitude string    `valid:"required" gorm:"type:varchar(45);not null;column:longitude"`
 
 	User User `valid:"-" gorm:"foreignkey:UserID"`
 }
