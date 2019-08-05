@@ -14,8 +14,15 @@ before_script:
 - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 server:
+    stage: build
+    script:
+      - docker build --pull -t $REGISTRY:$APP_VERSION  -t $REGISTRY .
+      - docker push $REGISTRY:$APP_VERSION
+      - docker push $REGISTRY
+
+cron:
   stage: build
   script:
-  - docker build --pull -t $REGISTRY:$APP_VERSION  -t $REGISTRY .
-  - docker push $REGISTRY:$APP_VERSION
-  - docker push $REGISTRY
+    - docker build --pull -f docker/cron/Dockerfile -t $REGISTRY/cron:$APP_VERSION -t $REGISTRY/cron .
+    - docker push $REGISTRY/cron:$APP_VERSION
+    - docker push $REGISTRY/cron

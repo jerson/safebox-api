@@ -23,6 +23,12 @@ type Prometheus struct {
 	Password string `toml:"password" required:"true"`
 }
 
+// SendGrid ...
+type SendGrid struct {
+	APIKey string `toml:"api_key" required:"true"`
+	From   string `toml:"from" required:"true"`
+}
+
 // Database ...
 type Database struct {
 	Name     string `toml:"name" default:"app"`
@@ -39,6 +45,7 @@ var Vars = struct {
 	Server     Server     `toml:"server"`
 	Cache      Cache      `toml:"cache"`
 	Prometheus Prometheus `toml:"prometheus"`
+	SendGrid   SendGrid   `toml:"sendgrid"`
 	Database   Database   `toml:"database"`
 }{}
 

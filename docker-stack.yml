@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.6'
 services:
   api:
     image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
@@ -13,6 +13,14 @@ services:
         - "traefik.frontend.rule=Host:safebox.jerson.dev"
         - "traefik.port=8000"
         - "traefik.docker.network=public"
+
+  cron:
+    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api/cron
+    configs:
+      - source: api
+        target: /app/config.toml
+    networks:
+      - private
 
   mysql:
     image: mysql:8.0
