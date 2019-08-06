@@ -8,7 +8,6 @@ import (
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/queue"
 	"strconv"
-	"time"
 )
 
 func init() {
@@ -61,38 +60,37 @@ func run(ctx context.Context) error {
 	forever := make(chan bool)
 	go func() {
 		for msg := range messages {
-			time.Sleep(time.Second * 2)
 
 			var err error
 			var message queue.Message
 
 			err = json.Unmarshal(msg.Body, &message)
 			if err != nil {
-				log.Errorf("[TASK] %s", err)
+				log.Error( err)
 				_ = msg.Ack(true)
 				continue
 			}
 
 			ctx := context.NewContextSingle("task")
-			log.Infof("[TASK] %s => %s", message.Name, message.Token)
+			log.Infof("new task: %s => %s", message.Name, message.Token)
 
 			switch message.Name {
 			case "email:location":
 
 				userID, err := strconv.Atoi(message.Params["userID"])
 				if err != nil {
-					log.Errorf("[TASK] %s", err)
+					log.Error(err)
 					break
 				}
 				err = commands.EmailLocation(ctx, int64(userID))
 				if err != nil {
-					log.Errorf("[TASK] %s", err)
+					log.Error( err)
 					break
 				}
-				log.Debug("[TASK] success")
+				log.Info("success EmailLocation")
 				break
 			default:
-				log.Warnf("[TASK] not defined: %s", message.Name)
+				log.Warnf("not defined: %s", message.Name)
 				break
 			}
 

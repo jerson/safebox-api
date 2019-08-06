@@ -35,6 +35,7 @@ longitude: {{.location.Longitude}}
 // EmailLocation ...
 func EmailLocation(ctx context.Context, userID int64) error {
 
+	log := ctx.GetLogger("EmailLocation")
 	locationRepo := repositories.NewUserLocationRepository(ctx)
 	repo := repositories.NewUserRepository(ctx)
 	user, err := repo.FindOneByID(userID)
@@ -45,11 +46,14 @@ func EmailLocation(ctx context.Context, userID int64) error {
 		return errors.New("empty email")
 	}
 
+	log.Info("find location")
 	location, err := locationRepo.FindOneByUserID(user.ID)
 	if err != nil {
 		return err
 	}
 	buf := &bytes.Buffer{}
+
+	log.Info("build template")
 	err = tmpl.Execute(buf, map[string]interface{}{
 		"name":     config.Vars.Name,
 		"user":     user,
@@ -61,18 +65,21 @@ func EmailLocation(ctx context.Context, userID int64) error {
 
 	htmlContent := buf.String()
 
+	log.Info("prepare email")
 	from := mail.NewEmail(config.Vars.Name, config.Vars.SendGrid.From)
 	to := mail.NewEmail(user.Username, user.Email)
 
 	subject := fmt.Sprintf("Last location used in %s", config.Vars.Name)
 	message := mail.NewSingleEmail(from, subject, to, "", htmlContent)
 
+	log.Info("send email")
 	client := sendgrid.NewSendClient(config.Vars.SendGrid.APIKey)
-	_, err = client.Send(message)
+	response, err := client.Send(message)
 
 	if err != nil {
 		return err
 	}
+	log.Infof("body: %s",response.Body)
 
 	return nil
 
