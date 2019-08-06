@@ -12,7 +12,7 @@ import (
 // BuyProduct ...
 func (s *Server) BuyProduct(context context.Context, in *BuyProductRequest) (*BuyProductResponse, error) {
 
-	ctx := appContext.NewContext(context, "HasProduct")
+	ctx := appContext.NewContext(context, "BuyProduct")
 	defer ctx.Close()
 
 	log := ctx.GetLogger("RPC")
