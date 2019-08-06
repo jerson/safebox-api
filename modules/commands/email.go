@@ -10,6 +10,7 @@ import (
 	"safebox.jerson.dev/api/modules/config"
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/repositories"
+	"time"
 )
 
 var tmpl = template.New("email")
@@ -17,15 +18,16 @@ var tmpl = template.New("email")
 func init() {
 	var err error
 	tmpl, err = tmpl.Parse(`
-<h1>{{.name}}</h1>
+<h1>{{.Name}}</h1>
 
-<p>Hello {{.user.Username}}, we send you your last location:</p>
+<p>Hello {{.Username}}, we send you your last location:</p>
 
-latitude: {{.location.Latitude}}
-longitude: {{.location.Longitude}}
+latitude: {{.Latitude}}
+longitude: {{.Longitude}}
+longitude: {{.Date}}
 
 
-<img width="100%" src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{.location.Latitude}},{{.location.Longitude}}&z=13&l=map&size=600,300&pt={{.location.Latitude}},{{.location.Longitude}},vkbkm"  alt="map"/>
+<img width="100%" src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{.Latitude}},{{.Longitude}}&z=13&l=map&size=600,300&pt={{.Latitude}},{{.Longitude}},vkbkm"  alt="map"/>
 `)
 	if err != nil {
 		panic(err)
@@ -55,9 +57,11 @@ func EmailLocation(ctx context.Context, userID int64) error {
 
 	log.Info("build template")
 	err = tmpl.Execute(buf, map[string]interface{}{
-		"name":     config.Vars.Name,
-		"user":     user,
-		"location": location,
+		"Name":      config.Vars.Name,
+		"Usename":   user.Username,
+		"Latitude":  location.Latitude,
+		"Longitude": location.Longitude,
+		"Date":      location.Date.Format(time.RFC850),
 	})
 	if err != nil {
 		return err
@@ -79,7 +83,7 @@ func EmailLocation(ctx context.Context, userID int64) error {
 	if err != nil {
 		return err
 	}
-	log.Infof("body: %s",response.Body)
+	log.Infof("body: %s", response.Body)
 
 	return nil
 

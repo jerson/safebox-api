@@ -66,7 +66,7 @@ func run(ctx context.Context) error {
 
 			err = json.Unmarshal(msg.Body, &message)
 			if err != nil {
-				log.Error( err)
+				log.Error(err)
 				_ = msg.Ack(true)
 				continue
 			}
@@ -84,7 +84,7 @@ func run(ctx context.Context) error {
 				}
 				err = commands.EmailLocation(ctx, int64(userID))
 				if err != nil {
-					log.Error( err)
+					log.Error(err)
 					break
 				}
 				log.Info("success EmailLocation")
