@@ -37,5 +37,5 @@ func (s *Server) DeleteDevice(context context.Context, in *DeleteDeviceRequest) 
 		return nil, errors.New("there was a problem, try again later")
 	}
 
-	return &DeleteDeviceResponse{Success: true}, nil
+	return &DeleteDeviceResponse{}, nil
 }

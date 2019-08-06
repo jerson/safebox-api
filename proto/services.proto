@@ -32,9 +32,6 @@ service Services {
     rpc GetAccount (AccountRequest) returns (AccountResponse) {
     }
 
-    rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
-    }
-
     rpc SendLocation (SendLocationRequest) returns (SendLocationResponse) {
     }
     rpc EnableLocation (EnableLocationRequest) returns (EnableLocationResponse) {
@@ -42,7 +39,27 @@ service Services {
     rpc DisableLocation (DisableLocationRequest) returns (DisableLocationResponse) {
     }
 
+    rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
+    }
+    rpc HasProduct (HasProductRequest) returns (HasProductResponse) {
+    }
+
 }
+
+message HasProductRequest {
+    string accessToken = 1;
+    string slug = 2;
+}
+message HasProductResponse {
+}
+
+message BuyProductRequest {
+    string accessToken = 1;
+    string slug = 2;
+}
+message BuyProductResponse {
+}
+
 
 message DisableLocationRequest {
     string accessToken = 1;
@@ -87,7 +104,6 @@ message DeleteDeviceRequest {
     int64 id = 2;
 }
 message DeleteDeviceResponse {
-    bool success = 1;
 }
 message Device {
     int64 id = 1;
@@ -106,7 +122,6 @@ message DeleteAccountRequest {
     int64 id = 2;
 }
 message DeleteAccountResponse {
-    bool success = 1;
 }
 
 message RefreshTokenRequest {
@@ -184,12 +199,4 @@ message AccountRequest {
 }
 message AccountResponse {
     Account account = 1;
-}
-
-message BuyProductRequest {
-    string accessToken = 1;
-    string slug = 2;
-}
-message BuyProductResponse {
-    bool success = 1;
 }

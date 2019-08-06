@@ -10,15 +10,19 @@ build: build-api build-cron build-commands build-queue
 
 build-api: format lint
 	$(BUILD) -o api-server main.go
+	upx api-server
 
 build-cron: format lint
 	$(BUILD) -o api-cron cmd/cron/main.go
+	upx api-cron
 
 build-commands: format lint
 	$(BUILD) -o api-commands cmd/commands/main.go
+	upx api-commands
 
 build-queue: format lint
 	$(BUILD) -o api-queue cmd/queue/main.go
+	upx api-queue
 
 proto:
 	protoc -I proto services.proto --go_out=plugins=grpc:services

@@ -37,5 +37,5 @@ func (s *Server) DeleteAccount(context context.Context, in *DeleteAccountRequest
 		return nil, errors.New("there was a problem, try again later")
 	}
 
-	return &DeleteAccountResponse{Success: true}, nil
+	return &DeleteAccountResponse{}, nil
 }
