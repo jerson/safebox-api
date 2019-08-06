@@ -16,7 +16,17 @@ var tmpl = template.New("email")
 
 func init() {
 	var err error
-	tmpl, err = tmpl.ParseFiles("templates/email/user_location.html")
+	tmpl, err = tmpl.Parse(`
+<h1>SafeBox</h1>
+
+<p>Hello {{.user.Username}}, we send you your last location:</p>
+
+latitude: {{.location.Latitude}}
+longitude: {{.location.Longitude}}
+
+
+<img width="100%" src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{.location.Latitude}},{{.location.Longitude}}&z=13&l=map&size=600,300&pt={{.location.Latitude}},{{.location.Longitude}},vkbkm"  alt="map"/>
+`)
 	if err != nil {
 		panic(err)
 	}
