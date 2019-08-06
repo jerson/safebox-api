@@ -1,6 +1,6 @@
 FROM jerson/go:1.12 AS builder
 
-ENV WORKDIR ${GOPATH}/src/setbeat.com/api
+ENV WORKDIR ${GOPATH}/src/safebox.jerson.dev/api
 WORKDIR ${WORKDIR}
 
 COPY Gopkg.toml Gopkg.lock Makefile ./
