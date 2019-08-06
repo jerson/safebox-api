@@ -74,7 +74,7 @@ func run(ctx context.Context) error {
 			}
 
 			ctx := context.NewContextSingle("task")
-			log.Info("[TASK] %s => %s", message.Name, message.Token)
+			log.Infof("[TASK] %s => %s", message.Name, message.Token)
 
 			switch message.Name {
 			case "email:location":

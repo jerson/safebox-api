@@ -44,7 +44,7 @@ func main() {
 					return err
 				}
 
-				token, err := queue.SendEmailLocationTask(fmt.Sprintln(user.ID))
+				token, err := queue.SendEmailLocationTask(fmt.Sprint(user.ID))
 				if err != nil {
 					return err
 				}
