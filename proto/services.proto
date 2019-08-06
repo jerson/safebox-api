@@ -51,13 +51,19 @@ message HasProductRequest {
     string slug = 2;
 }
 message HasProductResponse {
+    bool purchased = 1;
+    string date = 2;
 }
 
 message BuyProductRequest {
     string accessToken = 1;
     string slug = 2;
+    string payload = 3;
+    string type = 4;
 }
 message BuyProductResponse {
+    int64 id = 1;
+    string date = 2;
 }
 
 

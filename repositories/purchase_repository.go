@@ -55,6 +55,11 @@ func (p PurchaseRepository) FindOneByID(ID int64) (*models.Purchase, error) {
 	return p.FindOne("id = ?", ID)
 }
 
+//FindOneByUser ...
+func (p PurchaseRepository) FindOneByUser(userID int64, productID int64) (*models.Purchase, error) {
+	return p.FindOne("user_id = ? AND product_id", userID, productID)
+}
+
 //Create ...
 func (p PurchaseRepository) Create(object models.Purchase) (*models.Purchase, error) {
 

@@ -89,6 +89,11 @@ func (p ProductRepository) FindOneByName(name string) (*models.Product, error) {
 	return p.FindOne("name = ?", name)
 }
 
+//FindOneBySlug ...
+func (p ProductRepository) FindOneBySlug(slug string) (*models.Product, error) {
+	return p.FindOne("slug = ?", slug)
+}
+
 //Create ...
 func (p ProductRepository) Create(object models.Product) (*models.Product, error) {
 
