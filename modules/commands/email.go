@@ -17,7 +17,7 @@ var tmpl = template.New("email")
 func init() {
 	var err error
 	tmpl, err = tmpl.Parse(`
-<h1>SafeBox</h1>
+<h1>{{.name}}</h1>
 
 <p>Hello {{.user.Username}}, we send you your last location:</p>
 
@@ -51,6 +51,7 @@ func EmailLocation(ctx context.Context, userID int64) error {
 	}
 	buf := &bytes.Buffer{}
 	err = tmpl.Execute(buf, map[string]interface{}{
+		"name":     config.Vars.Name,
 		"user":     user,
 		"location": location,
 	})
