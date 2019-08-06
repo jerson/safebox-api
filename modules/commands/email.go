@@ -74,7 +74,7 @@ func EmailLocation(ctx context.Context, userID int64) error {
 	to := mail.NewEmail(user.Username, user.Email)
 
 	subject := fmt.Sprintf("Last location used in %s", config.Vars.Name)
-	message := mail.NewSingleEmail(from, subject, to, "", htmlContent)
+	message := mail.NewSingleEmail(from, subject, to, htmlContent, htmlContent)
 
 	log.Info("send email")
 	client := sendgrid.NewSendClient(config.Vars.SendGrid.APIKey)
