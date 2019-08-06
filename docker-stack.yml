@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.7'
 services:
   api:
     image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
@@ -9,6 +9,7 @@ services:
       - public
       - private
     deploy:
+      replicas: 3
       labels:
         - "traefik.frontend.rule=Host:safebox.jerson.dev"
         - "traefik.port=8000"
@@ -19,6 +20,16 @@ services:
     configs:
       - source: api
         target: /app/config.toml
+    networks:
+      - private
+
+  queue:
+    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api/queue
+    configs:
+      - source: api
+        target: /app/config.toml
+    deploy:
+      replicas: 2
     networks:
       - private
 
@@ -46,6 +57,13 @@ services:
     networks:
       - private
 
+  rabbitmq:
+    image: rabbitmq:3.6-alpine
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    networks:
+      - private
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.9
     networks:
@@ -67,6 +85,7 @@ networks:
 
 
 volumes:
+  rabbitmq:
   mysql:
 
 configs:

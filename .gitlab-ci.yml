@@ -33,3 +33,10 @@ commands:
     - docker build --pull -f docker/commands/Dockerfile -t $REGISTRY/commands:$APP_VERSION -t $REGISTRY/commands .
     - docker push $REGISTRY/commands:$APP_VERSION
     - docker push $REGISTRY/commands
+
+queue:
+  stage: build
+  script:
+    - docker build --pull -f docker/queue/Dockerfile -t $REGISTRY/queue:$APP_VERSION -t $REGISTRY/queue .
+    - docker push $REGISTRY/queue:$APP_VERSION
+    - docker push $REGISTRY/queue

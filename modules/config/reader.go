@@ -12,21 +12,20 @@ type Server struct {
 	Port int `toml:"port" default:"8000"`
 }
 
-// Cache ...
-type Cache struct {
-	Enable bool `toml:"enable" default:"true"`
-}
-
-// Prometheus ...
-type Prometheus struct {
-	Username string `toml:"username" required:"true"`
-	Password string `toml:"password" required:"true"`
+// Cron ...
+type Cron struct {
+	TimeEmail string `toml:"time_email" required:"true"  default:"11:00"`
 }
 
 // SendGrid ...
 type SendGrid struct {
 	APIKey string `toml:"api_key" required:"true"`
-	From   string `toml:"from" required:"true"`
+	From   string `toml:"from" required:"true"  default:"no-reply@safebox.jerson.dev"`
+}
+
+//RabbitMQ ...
+type RabbitMQ struct {
+	Server string `toml:"server" default:"amqp://guest:guest@rabbitmq:5672"`
 }
 
 // Database ...
@@ -40,13 +39,14 @@ type Database struct {
 
 // Vars ...
 var Vars = struct {
-	Debug      bool       `toml:"debug" default:"false"`
-	Version    string     `toml:"version" default:"latest"`
-	Server     Server     `toml:"server"`
-	Cache      Cache      `toml:"cache"`
-	Prometheus Prometheus `toml:"prometheus"`
-	SendGrid   SendGrid   `toml:"sendgrid"`
-	Database   Database   `toml:"database"`
+	Name     string   `toml:"name" default:"SafeBox"`
+	Debug    bool     `toml:"debug" default:"false"`
+	Version  string   `toml:"version" default:"latest"`
+	Server   Server   `toml:"server"`
+	SendGrid SendGrid `toml:"sendgrid"`
+	RabbitMQ RabbitMQ `toml:"rabbitmq"`
+	Database Database `toml:"database"`
+	Cron     Cron     `toml:"cron"`
 }{}
 
 // ReadDefault ...

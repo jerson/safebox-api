@@ -1,0 +1,68 @@
+package commands
+
+import (
+	"bytes"
+	"errors"
+	"fmt"
+	"github.com/sendgrid/sendgrid-go"
+	"github.com/sendgrid/sendgrid-go/helpers/mail"
+	"html/template"
+	"safebox.jerson.dev/api/modules/config"
+	"safebox.jerson.dev/api/modules/context"
+	"safebox.jerson.dev/api/repositories"
+)
+
+var tmpl = template.New("email")
+
+func init() {
+	var err error
+	tmpl, err = tmpl.ParseFiles("templates/email/user_location.html")
+	if err != nil {
+		panic(err)
+	}
+}
+
+// EmailLocation ...
+func EmailLocation(ctx context.Context, userID int64) error {
+
+	locationRepo := repositories.NewUserLocationRepository(ctx)
+	repo := repositories.NewUserRepository(ctx)
+	user, err := repo.FindOneByID(userID)
+	if err != nil {
+		return err
+	}
+	if user.Email == "" {
+		return errors.New("empty email")
+	}
+
+	location, err := locationRepo.FindOneByUserID(user.ID)
+	if err != nil {
+		return err
+	}
+	buf := &bytes.Buffer{}
+	err = tmpl.Execute(buf, map[string]interface{}{
+		"user":     user,
+		"location": location,
+	})
+	if err != nil {
+		return err
+	}
+
+	htmlContent := buf.String()
+
+	from := mail.NewEmail(config.Vars.Name, config.Vars.SendGrid.From)
+	to := mail.NewEmail(user.Username, user.Email)
+
+	subject := fmt.Sprintf("Last location used in %s", config.Vars.Name)
+	message := mail.NewSingleEmail(from, subject, to, "", htmlContent)
+
+	client := sendgrid.NewSendClient(config.Vars.SendGrid.APIKey)
+	_, err = client.Send(message)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}

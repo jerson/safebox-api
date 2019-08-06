@@ -18,6 +18,39 @@ func NewUserRepository(ctx context.Context) UserRepository {
 	return UserRepository{BaseRepository: db.NewBaseRepository(ctx)}
 }
 
+//ListLocationEnabled ...
+func (u UserRepository) ListLocationEnabled(offset, limit int, sort, sortType string) (list models.UserList, err error) {
+
+	cn, err := u.DB()
+	if err != nil {
+		return
+	}
+	defer u.Close()
+	sortAllows := map[string]string{
+		"id": "id",
+	}
+
+	list = models.UserList{Limit: limit, Offset: offset}
+	qb := u.preload(cn.Model(models.User{})).
+		Where("location_enabled = ?", "1")
+	err = qb.
+		Order(util.SortValues(sort, sortType, sortAllows)).
+		Offset(offset).
+		Limit(limit).
+		Find(&list.Items).
+		Error
+
+	if err != nil {
+		return
+	}
+	err = qb.Count(&list.Total).Error
+	if err != nil {
+		list.Total = len(list.Items)
+	}
+
+	return
+}
+
 //List ...
 func (u UserRepository) List(offset, limit int, sort, sortType string) (list models.UserList, err error) {
 

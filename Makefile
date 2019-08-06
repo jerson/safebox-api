@@ -6,7 +6,7 @@ BUILD?=go build -ldflags="-w -s"
 
 default: build
 
-build: build-api build-cron build-commands
+build: build-api build-cron build-commands build-queue
 
 build-api: format lint
 	$(BUILD) -o api-server main.go
@@ -16,6 +16,9 @@ build-cron: format lint
 
 build-commands: format lint
 	$(BUILD) -o api-commands cmd/commands/main.go
+
+build-queue: format lint
+	$(BUILD) -o api-queue cmd/queue/main.go
 
 proto:
 	protoc -I proto services.proto --go_out=plugins=grpc:services
@@ -44,21 +47,25 @@ registry-build:
 	docker build --pull -t $(REGISTRY):$(APP_VERSION) .
 	docker build --pull -f docker/cron/Dockerfile -t $(REGISTRY)/cron:$(APP_VERSION) .
 	docker build --pull -f docker/commands/Dockerfile -t $(REGISTRY)/commands:$(APP_VERSION) .
+	docker build --pull -f docker/queue/Dockerfile -t $(REGISTRY)/queue:$(APP_VERSION) .
 
 registry-pull:
 	docker pull $(REGISTRY):$(APP_VERSION)
 	docker pull $(REGISTRY)/cron:$(APP_VERSION)
 	docker pull $(REGISTRY)/commands:$(APP_VERSION)
+	docker pull $(REGISTRY)/queue:$(APP_VERSION)
 
 registry-push:
 	docker push $(REGISTRY):$(APP_VERSION)
 	docker push $(REGISTRY)/cron:$(APP_VERSION)
 	docker push $(REGISTRY)/commands:$(APP_VERSION)
+	docker push $(REGISTRY)/queue:$(APP_VERSION)
 
 registry-clear:
 	docker image rm -f $(REGISTRY):$(APP_VERSION)
 	docker image rm -f $(REGISTRY)/cron:$(APP_VERSION)
 	docker image rm -f $(REGISTRY)/commands:$(APP_VERSION)
+	docker image rm -f $(REGISTRY)/queue:$(APP_VERSION)
 
 stop:
 	docker-compose stop

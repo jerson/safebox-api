@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.7'
 services:
   server:
     image: jerson/go:1.12
@@ -23,6 +23,9 @@ services:
       - MYSQL_PASSWORD=app
       - MYSQL_DATABASE=app
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
+
+  rabbitmq:
+    image: rabbitmq:3.6-alpine
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.9

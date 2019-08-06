@@ -150,6 +150,25 @@
   version = "v1.2.1"
 
 [[projects]]
+  digest = "1:043a68c728982a54355d57e347dd4b52ba5ab3fec50e7a57894b1baa80aa7a9e"
+  name = "github.com/sendgrid/rest"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "306b9bef57dc36f3435ccfcc08fe6ae2c6920344"
+  version = "v2.4.1"
+
+[[projects]]
+  digest = "1:2d1dca6b32a1a91c909efcb7f08b0ee7773fd32d95b376d066d99ec526d1329c"
+  name = "github.com/sendgrid/sendgrid-go"
+  packages = [
+    ".",
+    "helpers/mail",
+  ]
+  pruneopts = "UT"
+  revision = "9c0fdb97de76d31ebbd93122c3c4b68bc9c59733"
+  version = "v3.5.0"
+
+[[projects]]
   digest = "1:04457f9f6f3ffc5fea48e71d62f2ca256637dee0a04d710288e27e05c8b41976"
   name = "github.com/sirupsen/logrus"
   packages = ["."]
@@ -164,6 +183,14 @@
   pruneopts = "UT"
   revision = "e09e9389d85d8492d313d73d1469c029e710623f"
   version = "v0.1.4"
+
+[[projects]]
+  branch = "master"
+  digest = "1:d6bb6f3240a488ffe5bb6952b513569d009927dcb20ff94885f87b76cef2b698"
+  name = "github.com/streadway/amqp"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "75d898a42a940fbc854dfd1a4199eabdc00cf024"
 
 [[projects]]
   digest = "1:ca4df663ad76879ad38dbd736493679cbb1aa596c6d479fd9fc5e959e5ceb4fb"
@@ -311,8 +338,11 @@
     "github.com/keybase/go-crypto/openpgp/armor",
     "github.com/keybase/go-crypto/openpgp/packet",
     "github.com/rs/xid",
+    "github.com/sendgrid/sendgrid-go",
+    "github.com/sendgrid/sendgrid-go/helpers/mail",
     "github.com/sirupsen/logrus",
     "github.com/soheilhy/cmux",
+    "github.com/streadway/amqp",
     "github.com/urfave/cli",
     "golang.org/x/sync/errgroup",
     "google.golang.org/grpc",

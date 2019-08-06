@@ -2,6 +2,7 @@
 api-server
 api-cron
 api-commands
+api-queue
 vendor/
 config.toml
 *.pprof
