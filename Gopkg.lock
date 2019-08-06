@@ -64,6 +64,14 @@
   version = "v0.9.6"
 
 [[projects]]
+  branch = "master"
+  digest = "1:0185668237f6dda61481124a5bdd479a5b49e5866952f7b804535158edefc126"
+  name = "github.com/jasonlvhit/gocron"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "18abb4835426ee97944e560c9281dd4dbdcf2e68"
+
+[[projects]]
   digest = "1:6badb17f9fa52d93054ab8b282a5f8776b17a2bc3b862f84444a57fceb23cc46"
   name = "github.com/jinzhu/configor"
   packages = ["."]
@@ -148,6 +156,14 @@
   pruneopts = "UT"
   revision = "839c75faf7f98a33d445d181f3018b5c3409a45e"
   version = "v1.4.2"
+
+[[projects]]
+  digest = "1:ca4df663ad76879ad38dbd736493679cbb1aa596c6d479fd9fc5e959e5ceb4fb"
+  name = "github.com/urfave/cli"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e6cf83ec39f6e1158ced1927d4ed14578fda8edb"
+  version = "v1.21.0"
 
 [[projects]]
   branch = "master"
@@ -272,6 +288,7 @@
     "github.com/golang/protobuf/proto",
     "github.com/gosimple/slug",
     "github.com/improbable-eng/grpc-web/go/grpcweb",
+    "github.com/jasonlvhit/gocron",
     "github.com/jinzhu/configor",
     "github.com/jinzhu/gorm",
     "github.com/keybase/go-crypto/openpgp",
@@ -279,6 +296,7 @@
     "github.com/keybase/go-crypto/openpgp/packet",
     "github.com/rs/xid",
     "github.com/sirupsen/logrus",
+    "github.com/urfave/cli",
     "google.golang.org/grpc",
     "google.golang.org/grpc/codes",
     "google.golang.org/grpc/status",

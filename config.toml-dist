@@ -19,5 +19,6 @@ password="change_this"
 
 [sendgrid]
 api_key="change_this"
-from="no-reply@safebox.com"
+from="no-reply@safebox.jerson.dev"
+
 
