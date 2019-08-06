@@ -23,12 +23,15 @@ func init() {
 
 <p>Hello {{.Username}}, we send you your last location:</p>
 
-latitude: {{.Latitude}}
-longitude: {{.Longitude}}
-date: {{.Date}}
+<ul>
+<li>latitude: {{.Latitude}}</li>
+<li>longitude: {{.Longitude}}</li>
+<li>date: {{.Date}}</li>
+<li>image: https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{.Latitude}},{{.Longitude}}&z=13&l=map&size=600,300&pt={{.Latitude}},{{.Longitude}},vkbkm</li>
+</ul>
 
-
-<img width="100%" src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{.Latitude}},{{.Longitude}}&z=13&l=map&size=600,300&pt={{.Latitude}},{{.Longitude}},vkbkm"  alt="map"/>
+<br/>
+<img width="100%" style="width:100%,min-height:400px" src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{.Latitude}},{{.Longitude}}&z=13&l=map&size=600,300&pt={{.Latitude}},{{.Longitude}},vkbkm"  alt="map"/>
 `)
 	if err != nil {
 		panic(err)
