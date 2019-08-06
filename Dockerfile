@@ -11,7 +11,7 @@ USER root
 COPY config.toml-dist config.toml
 COPY . .
 
-RUN make build
+RUN make build-api
 
 FROM jerson/base:1.1
 
