@@ -15,7 +15,7 @@ build-cron: format lint
 	$(BUILD) -o api-cron cmd/cron/main.go
 
 build-commands: format lint
-	$(BUILD) -o api-cron cmd/commands/main.go
+	$(BUILD) -o api-commands cmd/commands/main.go
 
 proto:
 	protoc -I proto services.proto --go_out=plugins=grpc:services
