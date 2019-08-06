@@ -4,14 +4,14 @@ stages:
   - build
 
 services:
-- docker:dind
+  - docker:dind
 
 variables:
   APP_VERSION: $CI_COMMIT_REF_NAME
   REGISTRY: $CI_REGISTRY_IMAGE
 
 before_script:
-- docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 server:
     stage: build
@@ -26,3 +26,10 @@ cron:
     - docker build --pull -f docker/cron/Dockerfile -t $REGISTRY/cron:$APP_VERSION -t $REGISTRY/cron .
     - docker push $REGISTRY/cron:$APP_VERSION
     - docker push $REGISTRY/cron
+
+commands:
+  stage: build
+  script:
+    - docker build --pull -f docker/commands/Dockerfile -t $REGISTRY/commands:$APP_VERSION -t $REGISTRY/commands .
+    - docker push $REGISTRY/commands:$APP_VERSION
+    - docker push $REGISTRY/commands

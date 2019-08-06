@@ -22,6 +22,17 @@ services:
     networks:
       - private
 
+  commands:
+    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api/commands
+    stdin_open: true
+    tty: true
+    entrypoint: sh
+    configs:
+      - source: api
+        target: /app/config.toml
+    networks:
+      - private
+
   mysql:
     image: mysql:8.0
     command: --sql_mode="" --default-authentication-plugin=mysql_native_password

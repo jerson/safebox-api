@@ -1,6 +1,7 @@
 .idea
 api-server
 api-cron
+api-commands
 vendor/
 config.toml
 *.pprof
