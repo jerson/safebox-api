@@ -18,10 +18,9 @@ func init() {
 }
 
 func main() {
-	s := gocron.NewScheduler()
-	s.Every(1).Day().At(config.Vars.Cron.TimeEmail).Do(sendMails)
-	s.Every(1).Minutes().Do(deleteAccessToken)
-	<-s.Start()
+	gocron.Every(1).Minutes().Do(deleteAccessToken)
+	gocron.Every(1).Day().At(config.Vars.Cron.TimeEmail).Do(sendMails)
+	<-gocron.Start()
 }
 
 func deleteAccessToken() {
@@ -31,7 +30,7 @@ func deleteAccessToken() {
 	repo := repositories.NewAccessTokenRepository(ctx)
 	err := repo.DeleteExpired()
 	if err != nil {
-		return
+		panic(err)
 	}
 	log.Info("removed all expired tokens")
 
