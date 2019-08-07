@@ -20,6 +20,9 @@ func (s *Server) EnableLocation(context context.Context, in *EnableLocationReque
 		log.Error(err)
 		return nil, errors.New("session has expired")
 	}
+	if in.Email == "" {
+		return nil, errors.New("email required")
+	}
 
 	repository := repositories.NewUserRepository(ctx)
 	err = repository.UpdateColumns(*user, map[string]string{

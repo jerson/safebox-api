@@ -38,12 +38,21 @@ service Services {
     }
     rpc DisableLocation (DisableLocationRequest) returns (DisableLocationResponse) {
     }
+    rpc GetEmail (GetEmailRequest) returns (GetEmailResponse) {
+    }
 
     rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
     }
     rpc HasProduct (HasProductRequest) returns (HasProductResponse) {
     }
 
+}
+
+message GetEmailRequest {
+    string accessToken = 1;
+}
+message GetEmailResponse {
+    string email = 1;
 }
 
 message HasProductRequest {
