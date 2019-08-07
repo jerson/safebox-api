@@ -38,6 +38,8 @@ func (p *Purchase) IsValid() error {
 
 //BeforeCreate ...
 func (p *Purchase) BeforeCreate(scope *gorm.Scope) error {
+	created := time.Now()
+	scope.SetColumn("date", created)
 
 	return p.IsValid()
 }

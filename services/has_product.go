@@ -29,15 +29,19 @@ func (s *Server) HasProduct(context context.Context, in *HasProductRequest) (*Ha
 		return nil, errors.New("product not found")
 	}
 
-	response := &HasProductResponse{}
+	response := HasProductResponse{}
 	repository := repositories.NewPurchaseRepository(ctx)
 	purchase, err := repository.FindOneByUser(user.ID, product.ID)
-	if err != nil {
-		response.Purchased = false
-	} else {
+	if purchase != nil {
 		response.Purchased = true
 		response.Date = purchase.Date.Format(time.RFC3339)
+	} else {
+		response.Purchased = false
 	}
 
-	return response, nil
+	if err != nil {
+		log.Debug(err)
+	}
+
+	return &response, nil
 }
