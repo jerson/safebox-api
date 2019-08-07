@@ -23,7 +23,7 @@ func main() {
 	log := ctx.GetLogger("main")
 
 	ch := make(chan string)
-	log.Info("running ")
+	log.Info("running")
 
 	go func() {
 		s := gocron.NewScheduler()
