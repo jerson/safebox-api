@@ -14,7 +14,12 @@ type Server struct {
 
 // Cron ...
 type Cron struct {
-	TimeEmail string `toml:"time_email" required:"true"  default:"11:00"`
+	TimeEmail string `toml:"time_email" default:"11:00"`
+}
+
+// Session ...
+type Session struct {
+	DurationMinutes int `toml:"duration_minutes" default:"5"`
 }
 
 // SendGrid ...
@@ -46,6 +51,7 @@ var Vars = struct {
 	SendGrid SendGrid `toml:"sendgrid"`
 	RabbitMQ RabbitMQ `toml:"rabbitmq"`
 	Database Database `toml:"database"`
+	Session  Session  `toml:"session"`
 	Cron     Cron     `toml:"cron"`
 }{}
 

@@ -3,6 +3,7 @@ package services
 import (
 	"errors"
 	"safebox.jerson.dev/api/models"
+	"safebox.jerson.dev/api/modules/config"
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/util"
 	"safebox.jerson.dev/api/repositories"
@@ -56,9 +57,12 @@ func getUserByToken(ctx context.Context, token string) (*models.User, error) {
 func getAuthResponse(ctx context.Context, user models.User) (*AuthResponse, error) {
 
 	repository := repositories.NewAccessTokenRepository(ctx)
-	dateExpire := time.Now().Add(time.Minute * 5)
+	dateExpire := time.Now().Add(time.Minute * time.Duration(config.Vars.Session.DurationMinutes))
 
-	randomToken := util.UniqueID()
+	randomToken, err := util.GenerateRandomASCIIString(128)
+	if err != nil {
+		return nil, err
+	}
 
 	accessTokenInput := models.AccessToken{
 		UserID:     user.ID,

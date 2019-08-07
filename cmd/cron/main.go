@@ -20,11 +20,25 @@ func init() {
 func main() {
 	s := gocron.NewScheduler()
 	s.Every(1).Day().At(config.Vars.Cron.TimeEmail).Do(sendMails)
+	s.Every(1).Minutes().Do(deleteAccessToken)
 	<-s.Start()
 }
 
+func deleteAccessToken() {
+	ctx := context.NewContextSingle("deleteAccessToken")
+	defer ctx.Close()
+	log := ctx.GetLogger("deleteAccessToken")
+	repo := repositories.NewAccessTokenRepository(ctx)
+	err := repo.DeleteExpired()
+	if err != nil {
+		return
+	}
+	log.Info("removed all expired tokens")
+
+}
+
 func sendMails() {
-	ctx := context.NewContextSingle("command")
+	ctx := context.NewContextSingle("sendMails")
 	defer ctx.Close()
 
 	err := sendMailsPage(ctx, 0)
@@ -34,7 +48,7 @@ func sendMails() {
 }
 
 func sendMailsPage(ctx context.Context, offset int) error {
-	log := ctx.GetLogger("action")
+	log := ctx.GetLogger("sendMailsPage")
 	repo := repositories.NewUserRepository(ctx)
 
 	limit := 100

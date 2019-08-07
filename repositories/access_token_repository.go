@@ -6,6 +6,7 @@ import (
 	"safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/modules/db"
 	"safebox.jerson.dev/api/modules/util"
+	"time"
 )
 
 //AccessTokenRepository ...
@@ -127,6 +128,22 @@ func (a AccessTokenRepository) Delete(object models.AccessToken) (err error) {
 	defer a.Close()
 
 	err = cn.Where("id = ? ", object.ID).Delete(object).Error
+	if err != nil {
+		return
+	}
+	return
+}
+
+//DeleteExpired ...
+func (a AccessTokenRepository) DeleteExpired() (err error) {
+
+	cn, err := a.DB()
+	if err != nil {
+		return
+	}
+	defer a.Close()
+
+	err = cn.Where("date_expire < ? ", time.Now()).Delete(models.AccessToken{}).Error
 	if err != nil {
 		return
 	}
