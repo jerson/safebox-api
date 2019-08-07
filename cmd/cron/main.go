@@ -49,7 +49,6 @@ func deleteAccessToken() {
 	if err != nil {
 		log.Error(err)
 	} else {
-
 		log.Info("removed all expired tokens")
 	}
 
