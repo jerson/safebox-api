@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"errors"
+	"github.com/asaskevich/govalidator"
 	appContext "safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/repositories"
 )
@@ -20,8 +21,8 @@ func (s *Server) EnableLocation(context context.Context, in *EnableLocationReque
 		log.Error(err)
 		return nil, errors.New("session has expired")
 	}
-	if in.Email == "" {
-		return nil, errors.New("email required")
+	if !govalidator.IsEmail(in.Email) {
+		return nil, errors.New("invalid email")
 	}
 
 	repository := repositories.NewUserRepository(ctx)
