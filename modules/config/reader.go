@@ -22,6 +22,11 @@ type Session struct {
 	DurationMinutes int `toml:"duration_minutes" default:"5"`
 }
 
+// Payment ...
+type Payment struct {
+	PackageID string `toml:"package_id" default:"dev.jerson.safebox"`
+}
+
 // SendGrid ...
 type SendGrid struct {
 	APIKey string `toml:"api_key" required:"true"`
@@ -51,6 +56,7 @@ var Vars = struct {
 	SendGrid SendGrid `toml:"sendgrid"`
 	RabbitMQ RabbitMQ `toml:"rabbitmq"`
 	Database Database `toml:"database"`
+	Payment  Payment  `toml:"payment"`
 	Session  Session  `toml:"session"`
 	Cron     Cron     `toml:"cron"`
 }{}

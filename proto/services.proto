@@ -69,6 +69,7 @@ message BuyProductRequest {
     string slug = 2;
     string payload = 3;
     string type = 4;
+    string token = 5;
 }
 message BuyProductResponse {
     int64 id = 1;

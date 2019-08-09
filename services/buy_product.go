@@ -3,7 +3,10 @@ package services
 import (
 	"context"
 	"errors"
+	"github.com/awa/go-iap/appstore"
+	"github.com/awa/go-iap/playstore"
 	"safebox.jerson.dev/api/models"
+	"safebox.jerson.dev/api/modules/config"
 	appContext "safebox.jerson.dev/api/modules/context"
 	"safebox.jerson.dev/api/repositories"
 	"time"
@@ -28,6 +31,34 @@ func (s *Server) BuyProduct(context context.Context, in *BuyProductRequest) (*Bu
 	if err != nil {
 		log.Error(err)
 		return nil, errors.New("product not found")
+	}
+
+	if in.Type == "android" {
+
+		client, err := playstore.New([]byte(in.Payload))
+		if err != nil {
+			log.Error(err)
+			return nil, errors.New("error verifying payment")
+		}
+		_, err = client.VerifyProduct(context, config.Vars.Payment.PackageID, product.Slug, in.Token)
+		if err != nil {
+			log.Error(err)
+			return nil, errors.New("error verifying payment")
+		}
+
+	} else if in.Type == "ios" {
+		client := appstore.New()
+		req := appstore.IAPRequest{
+			ReceiptData: in.Payload,
+		}
+		resp := &appstore.IAPResponse{}
+		err := client.Verify(context, req, resp)
+		if err != nil {
+			log.Error(err)
+			return nil, errors.New("error verifying payment")
+		}
+	} else {
+		return nil, errors.New("type not supported")
 	}
 
 	purchaseInput := models.Purchase{
