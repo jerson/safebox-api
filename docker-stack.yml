@@ -8,6 +8,8 @@ services:
     networks:
       - public
       - private
+    secrets:
+      - google_play
     deploy:
       replicas: 3
       labels:
@@ -87,6 +89,11 @@ networks:
 volumes:
   rabbitmq:
   mysql:
+
+secrets:
+  google_play:
+    external:
+      name: safebox_google_play
 
 configs:
   api:

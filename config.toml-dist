@@ -14,4 +14,4 @@ host="mysql"
 api_key="change_this"
 
 [purchase]
-google_play_secret="/run/secrets/google_play"
+google_play_file="/run/secrets/google_play"

@@ -24,8 +24,8 @@ type Session struct {
 
 // Purchase ...
 type Purchase struct {
-	PackageID        string `toml:"package_id" default:"dev.jerson.safebox"`
-	GooglePlaySecret string `toml:"google_play_secret" required:"true"`
+	PackageID      string `toml:"package_id" default:"dev.jerson.safebox"`
+	GooglePlayFile string `toml:"google_play_file" required:"true"`
 }
 
 // SendGrid ...

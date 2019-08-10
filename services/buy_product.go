@@ -36,7 +36,7 @@ func (s *Server) BuyProduct(context context.Context, in *BuyProductRequest) (*Bu
 
 	if in.Type == "android" {
 
-		jsonKey, err := ioutil.ReadFile(config.Vars.Purchase.GooglePlaySecret)
+		jsonKey, err := ioutil.ReadFile(config.Vars.Purchase.GooglePlayFile)
 		if err != nil {
 			log.Error(err)
 			return nil, errors.New("error verifying payment")
