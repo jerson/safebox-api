@@ -14,9 +14,9 @@ import (
 )
 
 // BuyProduct ...
-func (s *Server) BuyProduct(context context.Context, in *BuyProductRequest) (*BuyProductResponse, error) {
+func (s *Server) BuyProduct(contextApp context.Context, in *BuyProductRequest) (*BuyProductResponse, error) {
 
-	ctx := appContext.NewContext(context, "BuyProduct")
+	ctx := appContext.NewContext(contextApp, "BuyProduct")
 	defer ctx.Close()
 
 	log := ctx.GetLogger("RPC")
@@ -48,7 +48,8 @@ func (s *Server) BuyProduct(context context.Context, in *BuyProductRequest) (*Bu
 			return nil, errors.New("error verifying payment")
 		}
 
-		_, err = client.VerifyProduct(context, config.Vars.Purchase.PackageID, product.Slug, in.Payload)
+		ctx := context.Background()
+		_, err = client.VerifyProduct(ctx, config.Vars.Purchase.PackageID, product.Slug, in.Payload)
 		if err != nil {
 			log.Error(err)
 			return nil, errors.New("error verifying payment")
@@ -60,7 +61,9 @@ func (s *Server) BuyProduct(context context.Context, in *BuyProductRequest) (*Bu
 			ReceiptData: in.Payload,
 		}
 		resp := &appstore.IAPResponse{}
-		err := client.Verify(context, req, resp)
+
+		ctx := context.Background()
+		err := client.Verify(ctx, req, resp)
 		if err != nil {
 			log.Error(err)
 			return nil, errors.New("error verifying payment")
