@@ -57,7 +57,7 @@ var Vars = struct {
 	SendGrid SendGrid `toml:"sendgrid"`
 	RabbitMQ RabbitMQ `toml:"rabbitmq"`
 	Database Database `toml:"database"`
-	Payment  Purchase `toml:"payment"`
+	Purchase Purchase `toml:"payment"`
 	Session  Session  `toml:"session"`
 	Cron     Cron     `toml:"cron"`
 }{}
