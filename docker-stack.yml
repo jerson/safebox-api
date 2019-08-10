@@ -10,6 +10,8 @@ services:
       - private
     secrets:
       - google_play
+    dns:
+      - 8.8.8.8
     deploy:
       replicas: 3
       labels:
