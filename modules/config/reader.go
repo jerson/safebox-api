@@ -14,7 +14,7 @@ type Server struct {
 
 // Cron ...
 type Cron struct {
-	TimeEmail string `toml:"time_email" default:"11:00"`
+	TimeEmail string `toml:"time_email" default:"16:00"`
 }
 
 // Session ...
@@ -22,15 +22,16 @@ type Session struct {
 	DurationMinutes int `toml:"duration_minutes" default:"5"`
 }
 
-// Payment ...
-type Payment struct {
-	PackageID string `toml:"package_id" default:"dev.jerson.safebox"`
+// Purchase ...
+type Purchase struct {
+	PackageID        string `toml:"package_id" default:"dev.jerson.safebox"`
+	GooglePlaySecret string `toml:"google_play_secret" required:"true"`
 }
 
 // SendGrid ...
 type SendGrid struct {
 	APIKey string `toml:"api_key" required:"true"`
-	From   string `toml:"from" required:"true"  default:"no-reply@safebox.jerson.dev"`
+	From   string `toml:"from"  default:"no-reply@safebox.jerson.dev"`
 }
 
 //RabbitMQ ...
@@ -56,7 +57,7 @@ var Vars = struct {
 	SendGrid SendGrid `toml:"sendgrid"`
 	RabbitMQ RabbitMQ `toml:"rabbitmq"`
 	Database Database `toml:"database"`
-	Payment  Payment  `toml:"payment"`
+	Payment  Purchase `toml:"payment"`
 	Session  Session  `toml:"session"`
 	Cron     Cron     `toml:"cron"`
 }{}

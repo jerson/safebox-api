@@ -12,3 +12,4 @@ config.toml
 *.tar.gz
 *.log
 *.pid
+google-play.json

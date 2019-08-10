@@ -13,4 +13,5 @@ host="mysql"
 [sendgrid]
 api_key="change_this"
 
-
+[purchase]
+google_play_secret="/run/secrets/google_play"

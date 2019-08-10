@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/awa/go-iap/appstore"
 	"github.com/awa/go-iap/playstore"
+	"io/ioutil"
 	"safebox.jerson.dev/api/models"
 	"safebox.jerson.dev/api/modules/config"
 	appContext "safebox.jerson.dev/api/modules/context"
@@ -35,12 +36,19 @@ func (s *Server) BuyProduct(context context.Context, in *BuyProductRequest) (*Bu
 
 	if in.Type == "android" {
 
-		client, err := playstore.New([]byte(in.Payload))
+		jsonKey, err := ioutil.ReadFile(config.Vars.Payment.GooglePlaySecret)
 		if err != nil {
 			log.Error(err)
 			return nil, errors.New("error verifying payment")
 		}
-		_, err = client.VerifyProduct(context, config.Vars.Payment.PackageID, product.Slug, in.Token)
+
+		client, err := playstore.New(jsonKey)
+		if err != nil {
+			log.Error(err)
+			return nil, errors.New("error verifying payment")
+		}
+
+		_, err = client.VerifyProduct(context, config.Vars.Payment.PackageID, product.Slug, in.Payload)
 		if err != nil {
 			log.Error(err)
 			return nil, errors.New("error verifying payment")
