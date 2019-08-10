@@ -12,6 +12,7 @@ type Purchase struct {
 	UserID    int64     `valid:"required" gorm:"type:bigint(20);not null;unique_index:user_id_UNIQUE;column:user_id"`
 	ProductID int64     `valid:"required" gorm:"type:bigint(20);not null;unique_index:user_id_UNIQUE;index:fk_purchase_2_idx;column:product_id"`
 	Payload   string    `valid:"required" gorm:"type:text;column:payload"`
+	Hash      string    `valid:"-" gorm:"type:varchar(250);unique;not null;unique_index:hash_UNIQUE;index:hash_idx;column:hash"`
 	Date      time.Time `valid:"-" gorm:"type:datetime;not null;column:date"`
 
 	User    User    `valid:"-" gorm:"foreignkey:UserID"`

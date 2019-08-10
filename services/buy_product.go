@@ -9,6 +9,7 @@ import (
 	"safebox.jerson.dev/api/models"
 	"safebox.jerson.dev/api/modules/config"
 	appContext "safebox.jerson.dev/api/modules/context"
+	"safebox.jerson.dev/api/modules/util"
 	"safebox.jerson.dev/api/repositories"
 	"time"
 )
@@ -70,10 +71,12 @@ func (s *Server) BuyProduct(contextApp context.Context, in *BuyProductRequest) (
 		return nil, errors.New("type not supported")
 	}
 
+	hash := util.SHA512(in.Payload)
 	purchaseInput := models.Purchase{
 		UserID:    user.ID,
 		ProductID: product.ID,
 		Payload:   in.Payload,
+		Hash:      hash,
 	}
 	repository := repositories.NewPurchaseRepository(ctx)
 	purchase, err := repository.Create(purchaseInput)
