@@ -13,7 +13,7 @@ COPY . .
 
 RUN make build-api
 
-FROM jerson/base:1.1
+FROM jerson/base:1.2
 
 LABEL maintainer="jeral17@gmail.com"
 
