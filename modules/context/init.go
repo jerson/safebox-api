@@ -3,7 +3,6 @@ package context
 import (
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"safebox.jerson.dev/api/modules/config"
 )
 
 // template ...
@@ -35,11 +34,8 @@ func (r *template) GetLogger(tag string) *logrus.Entry {
 
 	log := logrus.New()
 
-	if config.Vars.Debug {
-		log.SetLevel(logrus.DebugLevel)
-	}else{
-		log.SetLevel(logrus.DebugLevel)
-	}
+	log.SetLevel(logrus.DebugLevel)
+
 	r.Logger = log.WithFields(map[string]interface{}{
 		"category": r.Category,
 		"tag":      tag,
