@@ -37,6 +37,8 @@ func (r *template) GetLogger(tag string) *logrus.Entry {
 
 	if config.Vars.Debug {
 		log.SetLevel(logrus.DebugLevel)
+	}else{
+		log.SetLevel(logrus.DebugLevel)
 	}
 	r.Logger = log.WithFields(map[string]interface{}{
 		"category": r.Category,
