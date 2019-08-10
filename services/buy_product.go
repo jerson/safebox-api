@@ -35,6 +35,8 @@ func (s *Server) BuyProduct(contextApp context.Context, in *BuyProductRequest) (
 		return nil, errors.New("product not found")
 	}
 
+	log.Debug("request", in)
+
 	if in.Type == "android" {
 
 		jsonKey, err := ioutil.ReadFile(config.Vars.Purchase.GooglePlayFile)
