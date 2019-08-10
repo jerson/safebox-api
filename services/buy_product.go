@@ -48,8 +48,7 @@ func (s *Server) BuyProduct(contextApp context.Context, in *BuyProductRequest) (
 			return nil, errors.New("error verifying payment")
 		}
 
-		ctx := context.Background()
-		_, err = client.VerifyProduct(ctx, config.Vars.Purchase.PackageID, product.Slug, in.Payload)
+		_, err = client.VerifyProduct(contextApp, config.Vars.Purchase.PackageID, product.Slug, in.Payload)
 		if err != nil {
 			log.Error(err)
 			return nil, errors.New("error verifying payment")
@@ -62,8 +61,7 @@ func (s *Server) BuyProduct(contextApp context.Context, in *BuyProductRequest) (
 		}
 		resp := &appstore.IAPResponse{}
 
-		ctx := context.Background()
-		err := client.Verify(ctx, req, resp)
+		err := client.Verify(contextApp, req, resp)
 		if err != nil {
 			log.Error(err)
 			return nil, errors.New("error verifying payment")
