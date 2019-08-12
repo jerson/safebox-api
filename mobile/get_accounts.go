@@ -7,7 +7,7 @@ import (
 )
 
 // GetAccounts ...
-func (s *SafeBox) GetAccounts() (*AccountsResponse, error) {
+func (s *SafeBox) GetAccounts() (*AccountSingleCollection, error) {
 
 	conn, err := s.dial()
 	if err != nil {
@@ -39,5 +39,5 @@ func (s *SafeBox) GetAccounts() (*AccountsResponse, error) {
 		})
 	}
 
-	return &AccountsResponse{Accounts: accounts}, nil
+	return NewAccountSingleCollection(accounts), nil
 }

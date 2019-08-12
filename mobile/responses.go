@@ -32,17 +32,17 @@ type Account struct {
 	Hint     string
 }
 
-// AccountsResponse ...
-type AccountsResponse struct {
-	Accounts []*AccountSingle
-}
-
 // AccountSingle ...
 type AccountSingle struct {
 	ID       int64
 	Label    string
 	Username string
 	Hint     string
+}
+
+// Equal ...
+func (s *AccountSingle) Equal(s2 *AccountSingle) bool {
+	return s.ID == s2.ID
 }
 
 // LogoutResponse ...
