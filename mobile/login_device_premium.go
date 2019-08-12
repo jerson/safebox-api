@@ -29,7 +29,7 @@ func (s *SafeBox) LoginDevicePremium(publicKey string) (*AuthResponse, error) {
 		AccessToken: response.AccessToken,
 		Slug:        "wearableaccess",
 	})
-	if productResponse == nil {
+	if productResponse == nil || !productResponse.Purchased {
 		return nil, errors.New("premium required")
 	}
 

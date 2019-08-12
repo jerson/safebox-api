@@ -26,14 +26,13 @@ func (s *SafeBox) LoginPremium(username, password string) (*AuthResponse, error)
 		return nil, err
 	}
 
-	productResponse, _ := client.HasProduct(context.Background(), &services.HasProductRequest{
+	productResponse, err := client.HasProduct(context.Background(), &services.HasProductRequest{
 		AccessToken: response.AccessToken,
 		Slug:        "wearableaccess",
 	})
-	if productResponse == nil {
+	if productResponse == nil || !productResponse.Purchased {
 		return nil, errors.New("premium required")
 	}
-
 	s.Session.login(response)
 	s.Session.setPassword(password)
 	return &AuthResponse{
