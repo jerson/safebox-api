@@ -49,7 +49,14 @@ func main() {
 	port := fmt.Sprintf(":%d", config.Vars.Server.Port)
 	fmt.Println("running: ", port)
 
+	rpcPort := fmt.Sprintf(":%d", config.Vars.Server.RPCPort)
+	fmt.Println("running RPC: ", rpcPort)
+
 	listener, err := net.Listen("tcp", port)
+	if err != nil {
+		panic(err)
+	}
+	listenerRPC, err := net.Listen("tcp", rpcPort)
 	if err != nil {
 		panic(err)
 	}
@@ -62,6 +69,7 @@ func main() {
 	httpListener := mux.Match(cmux.HTTP1())
 
 	group := new(errgroup.Group)
+	group.Go(func() error { return grpcServe(server, listenerRPC) })
 	group.Go(func() error { return grpcServe(server, grpcListener) })
 	group.Go(func() error { return grpcWebServe(server, grpcWebListener) })
 	group.Go(func() error { return httpServe(httpListener) })

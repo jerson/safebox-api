@@ -24,6 +24,6 @@ WORKDIR ${WORKDIR}
 COPY --from=builder ${BUILDER_PATH}/config.toml .
 COPY --from=builder ${BUILDER_PATH}/api-server .
 
-EXPOSE 8000
+EXPOSE 8000 50051
 
 ENTRYPOINT ["/app/api-server"]

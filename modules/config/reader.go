@@ -9,7 +9,8 @@ import (
 
 // Server ...
 type Server struct {
-	Port int `toml:"port" default:"8000"`
+	Port    int `toml:"port" default:"8000"`
+	RPCPort int `toml:"rpc_port" default:"50051"`
 }
 
 // Cron ...

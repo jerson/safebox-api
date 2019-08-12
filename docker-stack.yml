@@ -10,6 +10,8 @@ services:
       - private
     secrets:
       - google_play
+    ports:
+      - 50051:50051
     dns:
       - 8.8.8.8
     deploy:
