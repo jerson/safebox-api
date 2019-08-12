@@ -1,6 +1,23 @@
 package safebox
 
-import "safebox.jerson.dev/api/services"
+import (
+	"safebox.jerson.dev/api/services"
+)
+
+// SetSessionResponse ...
+func (s *SafeBox) SetSessionResponse(response *AuthResponse) {
+	s.Session.response = &services.AuthResponse{
+		AccessToken: response.AccessToken,
+		DateExpire:  response.DateExpire,
+		Date:        response.Date,
+	}
+}
+
+// SetSessionPassword ...
+func (s *SafeBox) SetSessionPassword(password string) {
+	s.Session.password = password
+
+}
 
 // Session ...
 type Session struct {
@@ -8,12 +25,6 @@ type Session struct {
 	password string
 }
 
-// SetAccessToken ...
-func (s Session) SetAccessToken(token string) {
-	s.response = &services.AuthResponse{
-		AccessToken: token,
-	}
-}
 func (s Session) login(response *services.AuthResponse) {
 	s.response = response
 }
