@@ -23,7 +23,7 @@ func (s *SafeBox) LoginPremium(username, password string) (*AuthResponse, error)
 	}
 	response, err := client.Login(context.Background(), request)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("invalid credentials")
 	}
 
 	productResponse, err := client.HasProduct(context.Background(), &services.HasProductRequest{

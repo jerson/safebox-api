@@ -22,7 +22,7 @@ func (s *SafeBox) LoginDevicePremium(publicKey string) (*AuthResponse, error) {
 	}
 	response, err := client.LoginWithDevice(context.Background(), request)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("invalid credentials")
 	}
 
 	productResponse, _ := client.HasProduct(context.Background(), &services.HasProductRequest{
