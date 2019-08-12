@@ -25,15 +25,15 @@ type Session struct {
 	password string
 }
 
-func (s Session) login(response *services.AuthResponse) {
+func (s *Session) login(response *services.AuthResponse) {
 	s.response = response
 }
 
-func (s Session) logout() {
+func (s *Session) logout() {
 	s.response = nil
 	s.password = ""
 }
 
-func (s Session) setPassword(password string) {
+func (s *Session) setPassword(password string) {
 	s.password = password
 }
