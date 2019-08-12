@@ -23,6 +23,12 @@ build-queue: format lint
 proto:
 	protoc -I proto services.proto --go_out=plugins=grpc:services
 
+mobile-android:
+	gomobile bind -ldflags="-w -s" -target=android -o Safebox.aar safebox.jerson.dev/api/mobile
+
+mobile-ios:
+	gomobile bind -ldflags="-w -s" -target=ios -o Safebox.framework safebox.jerson.dev/api/mobile
+
 dump:
 	./scripts/dump_db.sh
 

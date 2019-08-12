@@ -12,4 +12,7 @@ config.toml
 *.tar.gz
 *.log
 *.pid
+*.aar
+*.jar
+*.framework
 google-play.json
