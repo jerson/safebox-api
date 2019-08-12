@@ -4,6 +4,7 @@ services:
     image: jerson/go:1.12
     ports:
       - 8000:8000
+      - 50051:50051
     working_dir: /srv/go/src/safebox.jerson.dev/api
     stdin_open: true
     tty: true
