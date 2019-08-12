@@ -24,6 +24,7 @@ func (s *SafeBox) LoginDevice(publicKey string) (*AuthResponse, error) {
 		return nil, err
 	}
 	s.Session.login(response)
+	s.Session.setPassword("")
 	return &AuthResponse{
 		AccessToken: response.AccessToken,
 		DateExpire:  response.DateExpire,
