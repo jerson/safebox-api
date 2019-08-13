@@ -128,6 +128,7 @@ CREATE TABLE `purchase` (
   UNIQUE KEY `user_id_UNIQUE` (`user_id`,`product_id`),
   UNIQUE KEY `hash_UNIQUE` (`hash`),
   KEY `fk_purchase_2_idx` (`product_id`),
+  KEY `hash_idx` (`hash`),
   CONSTRAINT `fk_purchase_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_purchase_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -185,4 +186,4 @@ CREATE TABLE `user_location` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-10  9:28:40
+-- Dump completed on 2019-08-13 17:17:33
