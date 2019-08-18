@@ -32,7 +32,7 @@ type Purchase struct {
 // SendGrid ...
 type SendGrid struct {
 	APIKey string `toml:"api_key" required:"true"`
-	From   string `toml:"from"  default:"no-reply@safebox.jerson.dev"`
+	From   string `toml:"from"  default:"safebox@jerson.dev"`
 }
 
 //RabbitMQ ...
