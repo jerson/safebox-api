@@ -89,6 +89,7 @@ networks:
     external: true
   private:
 
+
 volumes:
   rabbitmq:
   mysql:
