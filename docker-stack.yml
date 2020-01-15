@@ -1,7 +1,7 @@
-version: '3.7'
+version: "3.7"
 services:
   api:
-    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
+    image: registry.gitlab.com/pardacho/safebox-api
     configs:
       - source: api
         target: /app/config.toml
@@ -22,7 +22,7 @@ services:
         - "traefik.docker.network=public"
 
   cron:
-    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api/cron
+    image: registry.gitlab.com/pardacho/safebox-api/cron
     configs:
       - source: api
         target: /app/config.toml
@@ -30,7 +30,7 @@ services:
       - private
 
   queue:
-    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api/queue
+    image: registry.gitlab.com/pardacho/safebox-api/queue
     configs:
       - source: api
         target: /app/config.toml
@@ -40,7 +40,7 @@ services:
       - private
 
   commands:
-    image: registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api/commands
+    image: registry.gitlab.com/pardacho/safebox-api/commands
     stdin_open: true
     tty: true
     entrypoint: sh
@@ -88,7 +88,6 @@ networks:
   public:
     external: true
   private:
-
 
 volumes:
   rabbitmq:

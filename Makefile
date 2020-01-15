@@ -1,4 +1,4 @@
-REGISTRY?=registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
+REGISTRY?=registry.gitlab.com/pardacho/safebox-api
 APP_VERSION?=latest
 BUILD?=go build -ldflags="-w -s"
 
