@@ -33,7 +33,7 @@ dump:
 	./scripts/dump_db.sh
 
 deps:
-	dep ensure -vendor-only
+	go mod download
 
 test:
 	go test $$(go list ./... | grep -v /vendor/)
