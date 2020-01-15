@@ -1,4 +1,4 @@
-FROM jerson/go:1.12 AS builder
+FROM jerson/go:1.13 AS builder
 
 ENV WORKDIR ${GOPATH}/src/safebox.jerson.dev/api
 WORKDIR ${WORKDIR}
