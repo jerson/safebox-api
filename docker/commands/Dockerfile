@@ -1,6 +1,6 @@
 FROM jerson/go:1.13 AS builder
 
-ENV WORKDIR ${GOPATH}/src/safebox.jerson.dev/api
+ENV WORKDIR /app
 WORKDIR ${WORKDIR}
 
 COPY go.mod go.sum Makefile ./
@@ -17,7 +17,7 @@ FROM jerson/base:1.3
 
 LABEL maintainer="jeral17@gmail.com"
 
-ENV BUILDER_PATH /srv/go/src/safebox.jerson.dev/api
+ENV BUILDER_PATH /app
 ENV WORKDIR /app
 WORKDIR ${WORKDIR}
 

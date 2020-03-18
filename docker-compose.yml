@@ -5,13 +5,13 @@ services:
     ports:
       - 8000:8000
       - 50051:50051
-    working_dir: /srv/go/src/safebox.jerson.dev/api
+    working_dir: /app
     stdin_open: true
     tty: true
     depends_on:
       - mysql
     volumes:
-      - ./:/srv/go/src/safebox.jerson.dev/api
+      - ./:/app
     entrypoint: sh
 
   mysql:
