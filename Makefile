@@ -1,4 +1,4 @@
-REGISTRY?=registry.gitlab.com/everest-mobile-seiii-se/safebox/safebox-api
+REGISTRY?=registry.gitlab.com/pardacho/safebox-api
 APP_VERSION?=latest
 BUILD?=go build -ldflags="-w -s"
 
@@ -23,6 +23,12 @@ build-queue: format lint
 proto:
 	protoc -I proto services.proto --go_out=plugins=grpc:services
 
+gomobile:
+	GO111MODULE=off go get golang.org/x/mobile/cmd/gomobile
+	gomobile init
+
+mobile: mobile-android mobile-ios
+
 mobile-android:
 	gomobile bind -ldflags="-w -s" -target=android -o Safebox.aar safebox.jerson.dev/api/mobile
 
@@ -33,7 +39,7 @@ dump:
 	./scripts/dump_db.sh
 
 deps:
-	dep ensure -vendor-only
+	go mod download
 
 test:
 	go test $$(go list ./... | grep -v /vendor/)
@@ -55,23 +61,11 @@ registry-build:
 	docker build --pull -f docker/commands/Dockerfile -t $(REGISTRY)/commands:$(APP_VERSION) .
 	docker build --pull -f docker/queue/Dockerfile -t $(REGISTRY)/queue:$(APP_VERSION) .
 
-registry-pull:
-	docker pull $(REGISTRY):$(APP_VERSION)
-	docker pull $(REGISTRY)/cron:$(APP_VERSION)
-	docker pull $(REGISTRY)/commands:$(APP_VERSION)
-	docker pull $(REGISTRY)/queue:$(APP_VERSION)
-
 registry-push:
 	docker push $(REGISTRY):$(APP_VERSION)
 	docker push $(REGISTRY)/cron:$(APP_VERSION)
 	docker push $(REGISTRY)/commands:$(APP_VERSION)
 	docker push $(REGISTRY)/queue:$(APP_VERSION)
-
-registry-clear:
-	docker image rm -f $(REGISTRY):$(APP_VERSION)
-	docker image rm -f $(REGISTRY)/cron:$(APP_VERSION)
-	docker image rm -f $(REGISTRY)/commands:$(APP_VERSION)
-	docker image rm -f $(REGISTRY)/queue:$(APP_VERSION)
 
 stop:
 	docker-compose stop

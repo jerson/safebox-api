@@ -1,9 +1,9 @@
-FROM jerson/go:1.12 AS builder
+FROM jerson/go:1.13 AS builder
 
 ENV WORKDIR ${GOPATH}/src/safebox.jerson.dev/api
 WORKDIR ${WORKDIR}
 
-COPY Gopkg.toml Gopkg.lock Makefile ./
+COPY go.mod go.sum Makefile ./
 RUN make deps
 
 USER root
@@ -13,7 +13,7 @@ COPY . .
 
 RUN make build-api
 
-FROM jerson/base:1.2
+FROM jerson/base:1.3
 
 LABEL maintainer="jeral17@gmail.com"
 
