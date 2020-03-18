@@ -3,11 +3,12 @@ package db
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/jinzhu/gorm"
 	"github.com/sirupsen/logrus"
 	"safebox.jerson.dev/api/modules/config"
 	"safebox.jerson.dev/api/modules/context"
-	"time"
 )
 
 // Setup ...
@@ -63,5 +64,5 @@ type Logger struct {
 
 // Print ...
 func (logger Logger) Print(values ...interface{}) {
-	logger.Instance.Error(values)
+	logger.Instance.Error(values...)
 }

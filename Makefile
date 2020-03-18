@@ -42,16 +42,16 @@ deps:
 	go mod download
 
 test:
-	go test $$(go list ./... | grep -v /vendor/)
+	go test ./...
 
 format:
-	go fmt $$(go list ./... | grep -v /vendor/)
+	go fmt ./...
 
 vet:
-	go vet $$(go list ./... | grep -v /vendor/)
+	go vet ./...
 
 lint:
-	golint -set_exit_status -min_confidence 0.3 $$(go list ./... | grep -v /vendor/)
+	golint -set_exit_status -min_confidence 0.3 ./...
 
 registry: registry-build registry-push
 
