@@ -1,42 +1,41 @@
-image: docker:latest
-
-stages:
-  - build
+image: docker:19.03
 
 services:
-  - docker:dind
+  - name: docker:19.03-dind
+    command: ["--experimental"]
 
 variables:
   APP_VERSION: $CI_COMMIT_REF_NAME
   REGISTRY: $CI_REGISTRY_IMAGE
+  BUILDX_URL: https://github.com/docker/buildx/releases/download/v0.3.1/buildx-v0.3.1.linux-amd64
 
 before_script:
+  - mkdir -p ~/.docker/cli-plugins
+  - wget $BUILDX_URL -O ~/.docker/cli-plugins/docker-buildx
+  - chmod +x ~/.docker/cli-plugins/docker-buildx
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  - docker buildx create --use --name new_builder
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
+stages:
+  - build
+
 server:
-    stage: build
-    script:
-      - docker build --pull -t $REGISTRY:$APP_VERSION  -t $REGISTRY .
-      - docker push $REGISTRY:$APP_VERSION
-      - docker push $REGISTRY
+  stage: build
+  script:
+    - docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -t $REGISTRY:$APP_VERSION -t $REGISTRY .
 
 cron:
   stage: build
   script:
-    - docker build --pull -f docker/cron/Dockerfile -t $REGISTRY/cron:$APP_VERSION -t $REGISTRY/cron .
-    - docker push $REGISTRY/cron:$APP_VERSION
-    - docker push $REGISTRY/cron
+    - docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -f docker/cron/Dockerfile -t $REGISTRY/cron:$APP_VERSION -t $REGISTRY/cron .
 
 commands:
   stage: build
   script:
-    - docker build --pull -f docker/commands/Dockerfile -t $REGISTRY/commands:$APP_VERSION -t $REGISTRY/commands .
-    - docker push $REGISTRY/commands:$APP_VERSION
-    - docker push $REGISTRY/commands
+    - docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -f docker/commands/Dockerfile -t $REGISTRY/commands:$APP_VERSION -t $REGISTRY/commands .
 
 queue:
   stage: build
   script:
-    - docker build --pull -f docker/queue/Dockerfile -t $REGISTRY/queue:$APP_VERSION -t $REGISTRY/queue .
-    - docker push $REGISTRY/queue:$APP_VERSION
-    - docker push $REGISTRY/queue
+    - docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -f docker/queue/Dockerfile -t $REGISTRY/queue:$APP_VERSION -t $REGISTRY/queue .
