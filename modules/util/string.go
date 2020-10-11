@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"crypto/sha512"
 	"encoding/base64"
+	"fmt"
 	"github.com/rs/xid"
 	"math/big"
 )
@@ -32,7 +33,7 @@ func GenerateRandomASCIIString(length int) (string, error) {
 		// Make sure that the number/byte/letter is inside
 		// the range of printable ASCII characters (excluding space and DEL)
 		if n > 32 && n < 127 {
-			result += string(n)
+			result += fmt.Sprint(n)
 		}
 	}
 }
