@@ -4,6 +4,7 @@ api-cron
 api-commands
 api-queue
 vendor/
+output/
 config.toml
 *.pprof
 *.memprof

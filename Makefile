@@ -20,8 +20,18 @@ build-commands: format lint
 build-queue: format lint
 	$(BUILD) -o api-queue cmd/queue/main.go
 
-proto:
-	protoc -I proto services.proto --go_out=plugins=grpc:services
+proto: proto-go proto-dart
+
+proto-deps:
+	go get github.com/gogo/protobuf/protoc-gen-gofast
+	flutter pub global activate protoc_plugin
+
+proto-dart:
+	rm -rf output/dart && mkdir -p output/dart
+	protoc -Iproto --dart_out=grpc:./output/dart services.proto
+
+proto-go:
+	protoc -Iproto --go_out=plugins=grpc:services services.proto
 
 gomobile:
 	GO111MODULE=off go get golang.org/x/mobile/cmd/gomobile
@@ -30,10 +40,12 @@ gomobile:
 mobile: mobile-android mobile-ios
 
 mobile-android:
-	gomobile bind -ldflags="-w -s" -target=android -o Safebox.aar safebox.jerson.dev/api/mobile
+	rm -rf output/android && mkdir -p output/android
+	gomobile bind -ldflags="-w -s" -target=android -o ./output/android/Safebox.aar safebox.jerson.dev/api/mobile
 
 mobile-ios:
-	gomobile bind -ldflags="-w -s" -target=ios -o Safebox.framework safebox.jerson.dev/api/mobile
+	rm -rf output/ios && mkdir -p output/ios
+	gomobile bind -ldflags="-w -s" -target=ios -o ./output/ios/Safebox.framework safebox.jerson.dev/api/mobile
 
 dump:
 	./scripts/dump_db.sh
