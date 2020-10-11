@@ -2,7 +2,7 @@ package safebox
 
 import (
 	"context"
-	"safebox.jerson.dev/api/modules/openpgp"
+	"github.com/jerson/openpgp-mobile/openpgp"
 	"safebox.jerson.dev/api/services"
 )
 
@@ -21,7 +21,7 @@ func (s *SafeBox) Register(username, password string) (*AuthResponse, error) {
 		Name:       username,
 		Passphrase: password,
 	}
-	pgp := openpgp.NewOpenPGP()
+	pgp := openpgp.NewFastOpenPGP()
 	keyPair, err := pgp.Generate(options)
 	if err != nil {
 		return nil, err

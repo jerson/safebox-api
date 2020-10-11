@@ -3,8 +3,8 @@ package services
 import (
 	"context"
 	"errors"
+	"github.com/jerson/openpgp-mobile/openpgp"
 	appContext "safebox.jerson.dev/api/modules/context"
-	"safebox.jerson.dev/api/modules/openpgp"
 	"safebox.jerson.dev/api/repositories"
 )
 
@@ -24,8 +24,8 @@ func (s *Server) Login(context context.Context, in *LoginRequest) (*AuthResponse
 		return nil, errors.New("invalid credentials")
 	}
 
-	pgp := openpgp.NewOpenPGP()
-	_, err = pgp.ReadPrivateKey(user.PrivateKey, in.Password)
+	pgp := openpgp.NewFastOpenPGP()
+	err = pgp.ReadPrivateKeys(user.PrivateKey, in.Password)
 	if err != nil {
 		log.Error(err)
 		return nil, errors.New("invalid credentials")

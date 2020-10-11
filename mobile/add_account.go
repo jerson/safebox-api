@@ -3,7 +3,7 @@ package safebox
 import (
 	"context"
 	"errors"
-	"safebox.jerson.dev/api/modules/openpgp"
+	"github.com/jerson/openpgp-mobile/openpgp"
 	"safebox.jerson.dev/api/services"
 )
 
@@ -22,7 +22,7 @@ func (s *SafeBox) AddAccount(label, hint, username, password string) (*AddAccoun
 
 	client := services.NewServicesClient(conn)
 
-	pgp := openpgp.NewOpenPGP()
+	pgp := openpgp.NewFastOpenPGP()
 	key, err := pgp.Encrypt(password, s.Session.response.KeyPair.PublicKey)
 	if err != nil {
 		return nil, err
