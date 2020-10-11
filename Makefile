@@ -31,7 +31,7 @@ proto-dart:
 	protoc -Iproto --dart_out=grpc:./output/dart services.proto
 
 proto-go:
-	protoc -Iproto --go_out=plugins=grpc:services services.proto
+	protoc -Iproto --go_out=plugins=grpc:./services services.proto
 
 gomobile:
 	GO111MODULE=off go get golang.org/x/mobile/cmd/gomobile
