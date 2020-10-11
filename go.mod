@@ -3,32 +3,37 @@ module safebox.jerson.dev/api
 go 1.14
 
 require (
-	cloud.google.com/go v0.44.0 // indirect
-	github.com/asaskevich/govalidator v0.0.0-20180315120708-ccb8e960c48f
-	github.com/awa/go-iap v1.0.1-0.20190619073638-062102b0f3bf
-	github.com/go-sql-driver/mysql v1.4.1
+	cloud.google.com/go v0.68.0 // indirect
+	github.com/asaskevich/govalidator v0.0.0-20200907205600-7a23bdc65eef
+	github.com/awa/go-iap v1.3.5
+	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
+	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
+	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.4.2
-	github.com/gorilla/websocket v1.4.0 // indirect
-	github.com/gosimple/slug v1.6.0
-	github.com/hashicorp/golang-lru v0.5.3 // indirect
-	github.com/improbable-eng/grpc-web v0.11.0
-	github.com/jasonlvhit/gocron v0.0.0-20190807165158-02e46f9ad554
+	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/gosimple/slug v1.9.0
+	github.com/improbable-eng/grpc-web v0.13.0
+	github.com/jasonlvhit/gocron v0.0.1
 	github.com/jerson/openpgp-mobile v0.9.2
-	github.com/jinzhu/configor v1.1.1
-	github.com/jinzhu/gorm v1.9.10
-	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
-	github.com/rainycape/unidecode v0.0.0-20150907023854-cb7f23ec59be // indirect
+	github.com/jinzhu/configor v1.2.0
+	github.com/jinzhu/gorm v1.9.16
+	github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223 // indirect
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/rs/xid v1.2.1
-	github.com/sendgrid/rest v2.4.1+incompatible // indirect
-	github.com/sendgrid/sendgrid-go v3.5.0+incompatible
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sendgrid/rest v2.6.1+incompatible // indirect
+	github.com/sendgrid/sendgrid-go v3.6.4+incompatible
+	github.com/sirupsen/logrus v1.7.0
 	github.com/soheilhy/cmux v0.1.4
-	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
-	github.com/urfave/cli v1.21.0
-	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80 // indirect
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58
-	golang.org/x/sys v0.0.0-20190804053845-51ab0e2deafa // indirect
-	google.golang.org/grpc v1.27.0
+	github.com/streadway/amqp v1.0.0
+	github.com/urfave/cli v1.22.4
+	go.opencensus.io v0.22.5 // indirect
+	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0 // indirect
+	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb // indirect
+	golang.org/x/sync v0.0.0-20201008141435-b3e1573b7520
+	golang.org/x/sys v0.0.0-20201009025420-dfb3f7c4e634 // indirect
+	google.golang.org/genproto v0.0.0-20201009135657-4d944d34d83c // indirect
+	google.golang.org/grpc v1.33.0
+	google.golang.org/grpc/examples v0.0.0-20201010204749-3c400e7fcc87 // indirect
 	google.golang.org/protobuf v1.25.0
+	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
