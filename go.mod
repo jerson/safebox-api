@@ -9,6 +9,7 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/protobuf v1.4.2
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/gosimple/slug v1.9.0

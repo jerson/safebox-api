@@ -23,7 +23,7 @@ build-queue: format lint
 proto: proto-go proto-dart
 
 proto-deps:
-	go get github.com/gogo/protobuf/protoc-gen-gofast
+	go get github.com/golang/protobuf/protoc-gen-go
 	flutter pub global activate protoc_plugin
 
 proto-dart:
